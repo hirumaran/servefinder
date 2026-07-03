@@ -20,3 +20,17 @@ export function websiteHostname(value: string | undefined): string | null {
   if (!value || !isValidHttpUrl(value)) return null;
   return new URL(value).hostname;
 }
+
+/** "2026-06-14" → "June 14, 2026". The T00:00:00 pins it to local time. */
+export function formatShiftDate(isoDate: string): string {
+  return new Date(`${isoDate}T00:00:00`).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+/** "3.5 hrs" / "1 hr" chip label. */
+export function hoursLabel(hours: number): string {
+  return `${hours} ${hours === 1 ? "hr" : "hrs"}`;
+}

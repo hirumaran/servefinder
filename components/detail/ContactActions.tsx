@@ -63,7 +63,7 @@ export function ContactActions({ opportunity }: { opportunity: Opportunity }) {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: `${opportunity.name} — ServeFinder`,
+          title: `${opportunity.name} — Pitch In`,
           text: `Volunteer opportunity: ${opportunity.name} (${opportunity.address.city}, ${opportunity.address.state})`,
           url,
         });

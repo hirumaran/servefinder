@@ -1,4 +1,4 @@
-# ServeFinder
+# Pitch In
 
 A web app that helps high school students **discover local volunteer opportunities** so
 they can earn the **40 community-service hours required to graduate**.
@@ -8,6 +8,12 @@ what the organization does, where it is, how far away it is, the age requirement
 **whether the org will verify service hours**, and how to contact it. Students then
 reach out to organizations **directly, on their own** — ideally with a parent or
 guardian in the loop.
+
+After a shift, students can log it in **My journal** (`/journal`): a private,
+device-local record of places, dates, hours (with a running tally toward 40), and
+notes. The journal also powers **personalized suggestions** — listings in the causes a
+student keeps coming back to, computed entirely in the browser. Journal data lives in
+`localStorage` on the student's device only; nothing is ever uploaded.
 
 > ## ⚠️ Replace the placeholder data before launch
 >
@@ -26,8 +32,12 @@ guardian in the loop.
 
 ## Core constraints (what this deliberately is — and isn't)
 
-- **Finder, not tracker.** No hour logging, timers, check-ins, or "progress toward 40
-  hours" anywhere. The one job is helping students *find* places.
+- **Finder first; the journal is device-local.** The main job is helping students
+  *find* places. The journal (hour log, 40-hour tally, suggestions) exists for the
+  student's own benefit and lives **only in their browser's localStorage** — it is
+  never sent anywhere, there is no sync, and the journal page has a delete-everything
+  button. It is explicitly *not* the official record; the UI repeatedly points
+  students back to their school's signed form.
 - **Read-only directory.** No in-app applications, booking, scheduling, or messaging
   with organizations. The app displays curated info; students use the contact details
   to reach out themselves.
@@ -35,7 +45,8 @@ guardian in the loop.
   Location is optional: ZIP entry is the default and browser geolocation is opt-in.
   Both are used **only in the browser** to compute distances (Haversine) — precise
   coordinates never touch a server, the URL, or any storage. Saved hearts are
-  in-memory for the visit only. There are no analytics.
+  in-memory for the visit only. Suggestions are computed client-side from the local
+  journal. There are no analytics.
 - **Curated data.** All listings come from one JSON file an operator maintains (see
   below). The data layer (`lib/opportunities.ts`) is the only module that touches the
   source, so it can move to SQLite/Postgres later without UI changes.
@@ -148,8 +159,10 @@ Any Node host works the same way (`npm run build && npm start`).
 - Detail pages and the About page repeatedly encourage students to **involve a
   parent/guardian** when contacting an org, and to confirm details (especially hour
   sign-off) before showing up.
-- There is intentionally **no** account system, hour tracking, in-app messaging,
-  scheduling, or payment anywhere — keep it that way when extending the app.
+- There is intentionally **no** account system, server-side data, in-app messaging,
+  scheduling, or payment anywhere — keep it that way when extending the app. The
+  journal must remain device-local: if you ever add sync or export, make it explicit,
+  opt-in, and parent-visible.
 - No analytics are included. If you add any, keep them aggregate and
   non-individualized (e.g. privacy-focused page-view counters), never per-student.
 
@@ -159,11 +172,12 @@ Any Node host works the same way (`npm run build && npm start`).
 app/                    # routes (App Router)
   page.tsx              #   home / search
   opportunities/        #   results (list + map) and detail pages
+  journal/              #   the device-local volunteer journal + suggestions
   about/                #   how it works, safety, disclaimers
   admin/ + api/admin/   #   operator editor (Basic Auth) + dev-only save API
-components/             # UI building blocks (filters, cards, maps, admin form)
+components/             # UI building blocks (filters, cards, journal, maps, admin form)
 data/opportunities.json # ⚠️ the dataset — placeholder until you replace it
-lib/                    # types, data loader/validator, filters, distance, geocode
+lib/                    # types, data loader/validator, filters, journal, suggestions
 public/zip-data/        # generated ZIP → [lat, lng] shards (Census ZCTA)
 scripts/                # zip-data generator
 proxy.ts                # Basic Auth gate for /admin

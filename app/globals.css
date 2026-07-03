@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design tokens. ServeFinder uses Tailwind's built-in palette:
+ * Design tokens. Pitch In uses Tailwind's built-in palette:
  *   - Primary: emerald (trust / service / community)
  *   - Accent:  amber   (warm highlights)
  *   - Neutrals: stone surfaces + slate text
@@ -17,7 +17,7 @@
   --font-heading: var(--font-nunito), var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
 
   /* shadcn semantic tokens, mapped onto the existing palette so any
-     registry component automatically wears ServeFinder's colors. */
+     registry component automatically wears Pitch In's colors. */
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);

@@ -41,6 +41,8 @@ const UI_ICONS = [
   "IconNavigation",
   "IconAlert",
   "IconLock",
+  "IconNotebook",
+  "IconTrash",
 ] as const;
 
 type IconComponent = ComponentType<{ className?: string }>;
@@ -49,7 +51,7 @@ export default function IconLabPage() {
   return (
     <div className="mx-auto max-w-5xl px-6 py-10">
       <h1 className="font-display text-2xl font-extrabold text-slate-900">
-        ServeFinder&apos;s hand-inked icon set
+        Pitch In&apos;s hand-inked icon set
       </h1>
       <p className="mt-1 text-slate-600">
         Every icon drawn for this site — no stock packs. Review sheet only.

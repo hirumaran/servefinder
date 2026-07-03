@@ -12,13 +12,13 @@ export function Footer() {
           <div className="max-w-md space-y-2">
             <p className="flex items-center gap-1.5 font-display text-lg font-extrabold text-slate-900">
               <IconSprout aria-hidden="true" className="size-5 text-emerald-700" />
-              Serve<span className="text-emerald-700">Finder</span>
+              Pitch&nbsp;<span className="text-emerald-700">In</span>
             </p>
             <p className="text-sm leading-relaxed text-slate-600">
               A free directory that helps high school students find volunteer
               opportunities and earn their 40 required service hours. We help you{" "}
-              <strong>find</strong> places — you contact them yourself and keep your
-              own hour records.
+              <strong>find</strong> places — you contact them yourself, and your
+              journal of shifts and hours stays right here on your device.
             </p>
           </div>
 
@@ -38,6 +38,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/journal" className="font-medium text-slate-600 hover:text-emerald-800">
+                  My journal
+                </Link>
+              </li>
+              <li>
                 <Link href="/about" className="font-medium text-slate-600 hover:text-emerald-800">
                   How it works &amp; safety
                 </Link>
@@ -52,7 +57,8 @@ export function Footer() {
             Details can change. Always confirm hours, age rules, and whether the
             organization signs service-hour forms <em>before</em> you show up — and
             loop in a parent or guardian when you reach out. This site never asks for
-            an account and never stores your location.
+            an account and never stores your location; your journal lives in your
+            browser, not on our servers.
           </p>
         </div>
 

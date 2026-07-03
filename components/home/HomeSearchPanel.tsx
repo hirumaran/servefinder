@@ -37,7 +37,7 @@ export function HomeSearchPanel() {
     <form
       onSubmit={handleSubmit}
       aria-label="Search volunteer opportunities"
-      className="relative space-y-5 rounded-3xl border border-stone-200 bg-white p-5 shadow-lg shadow-stone-200/60 sm:p-6"
+      className="relative space-y-5 rounded-3xl bg-white p-5 shadow-xl shadow-emerald-950/8 ring-1 ring-stone-900/10 sm:p-6"
     >
       <div className="space-y-2">
         <label htmlFor="home-q" className="block text-sm font-semibold text-slate-800">

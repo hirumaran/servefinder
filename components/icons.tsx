@@ -1,7 +1,7 @@
 import type { SVGProps } from "react";
 
 /**
- * ServeFinder's hand-inked icon set.
+ * Pitch In's hand-inked icon set.
  *
  * Every icon is drawn by hand on a 32×32 grid to feel like felt-tip doodles
  * in the margin of a notebook — nothing here comes from a stock icon pack.
@@ -301,6 +301,27 @@ export function IconAlert(props: IconProps) {
       <path d="M16 5.6 C 12.4 11.6 8.9 17.7 5.6 23.9 C 5.2 24.7 5.6 25.4 6.5 25.4 C 12.8 25.7 19.2 25.7 25.5 25.4 C 26.4 25.4 26.8 24.6 26.4 23.8 C 23.1 17.7 19.6 11.6 16 5.6" />
       <path d="M16 13.2 C 16 14.8 16 16.4 16.1 18" />
       <circle cx="16.1" cy="21.8" r="1.4" fill="currentColor" stroke="none" />
+    </Doodle>
+  );
+}
+
+export function IconNotebook(props: IconProps) {
+  return (
+    <Doodle {...props}>
+      <path d="M10.3 5.7 C 15.3 5.3 20.3 5.3 24.7 5.8 C 25.2 12.6 25.1 19.4 24.8 26.2 C 19.9 26.7 15 26.7 10.5 26.3 C 10.1 19.5 10 12.6 10.3 5.7" />
+      <path d="M7.1 9.6 C 8.5 9.4 9.9 9.4 11.3 9.5 M7.2 16 C 8.6 15.8 10 15.8 11.4 15.9 M7.1 22.4 C 8.5 22.2 9.9 22.3 11.3 22.4" strokeWidth={1.8} />
+      <path d="M14.6 12.2 C 16.7 12 18.8 12 20.8 12.1 M14.7 16.8 C 16.4 16.6 18.2 16.6 19.9 16.7" strokeWidth={1.8} />
+    </Doodle>
+  );
+}
+
+export function IconTrash(props: IconProps) {
+  return (
+    <Doodle {...props}>
+      <path d="M8.1 9.7 C 13.3 9.2 18.7 9.2 23.9 9.6" />
+      <path d="M13.5 9.4 C 13.4 7.9 14.2 6.9 15.9 6.8 C 17.6 6.7 18.5 7.6 18.5 9.2" />
+      <path d="M9.9 12.4 C 10.2 17.2 10.6 21.9 11.3 26.4 C 14.5 26.9 17.7 26.9 20.8 26.5 C 21.5 21.9 21.9 17.1 22.1 12.3" />
+      <path d="M14.2 15 C 14.3 17.9 14.5 20.7 14.8 23.5 M17.9 14.9 C 17.8 17.8 17.6 20.6 17.3 23.4" strokeWidth={1.8} />
     </Doodle>
   );
 }

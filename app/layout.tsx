@@ -13,8 +13,8 @@ const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-dm-sans" });
 
 export const metadata: Metadata = {
   title: {
-    default: "ServeFinder — Find volunteer opportunities near you",
-    template: "%s · ServeFinder",
+    default: "Pitch In — Find volunteer opportunities near you",
+    template: "%s · Pitch In",
   },
   description:
     "A free directory that helps high school students find local volunteer opportunities and earn their 40 required community-service hours. No accounts, no tracking.",

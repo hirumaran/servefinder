@@ -3,18 +3,19 @@ import type { CSSProperties } from "react";
 
 import { SquiggleConnector, SquiggleUnderline } from "@/components/doodles";
 import { HomeSearchPanel } from "@/components/home/HomeSearchPanel";
+import { SuggestionsStrip } from "@/components/home/SuggestionsStrip";
 import {
   IconArrowRight,
   IconCheck,
   IconKite,
   IconLaptop,
   IconLock,
+  IconNotebook,
   IconPaw,
   IconPin,
   IconSearch,
   IconShieldHeart,
   IconSignCheck,
-  IconSparkle,
   IconSpeech,
 } from "@/components/icons";
 import { Reveal } from "@/components/Reveal";
@@ -32,6 +33,21 @@ import { CATEGORIES } from "@/lib/types";
 /** Deterministic sticker tilts so the cause wall looks hand-placed, not random. */
 const TILTS = [-2, 1.5, -1, 2.2, -1.6, 1.2, -2.4, 1.8, -1.2, 2, -1.8, 1.4, -2.2, 1.6, -1.4];
 
+/**
+ * Hero "receipts": a few real listings shown as tappable proof the directory
+ * is real. Curated ids for name + category variety; a renamed id just drops
+ * its chip (and the "+ N more" count adjusts) rather than breaking the build.
+ */
+const RECEIPT_IDS: readonly string[] = [
+  "whisker-city-animal-shelter",
+  "bay-state-food-bank",
+  "maplewood-library-teen-corps",
+  "blue-hills-trail-days",
+];
+
+/** Gentler tilts than the sticker wall — the receipts should whisper. */
+const RECEIPT_TILTS = [-1.2, 0.8, -0.6, 1];
+
 const STEPS = [
   {
     icon: IconSearch,
@@ -48,6 +64,11 @@ const STEPS = [
     title: "Do the thing, get it signed",
     body: "Confirm the details, show up, help out. Bring your hour form — orgs marked “Verifies hours” will sign it.",
   },
+  {
+    icon: IconNotebook,
+    title: "Jot it in your journal",
+    body: "Log the shift and your hours — it stays on your device, keeps your 40-hour tally, and sharpens what we suggest next.",
+  },
 ] as const;
 
 export default function HomePage() {
@@ -58,32 +79,32 @@ export default function HomePage() {
     categoryCounts.set(o.category, (categoryCounts.get(o.category) ?? 0) + 1);
   }
   const virtualCount = opportunities.filter((o) => o.isVirtual).length;
+  const receipts = opportunities.filter((o) => RECEIPT_IDS.includes(o.id));
 
   return (
     <div>
       {/* ── Hero + search ─────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden border-b border-stone-200 bg-gradient-to-b from-emerald-50 to-stone-50">
+      <section className="relative overflow-hidden border-b border-stone-200 bg-white">
         {/* Margin doodles — decorative only, out of the way on small screens. */}
-        <IconSparkle
-          aria-hidden="true"
-          className="animate-float-y absolute top-14 left-[52%] hidden size-7 text-amber-400/80 lg:block"
-        />
         <IconPaw
           aria-hidden="true"
-          className="animate-float-y absolute top-8 right-[6%] hidden size-9 rotate-12 text-emerald-600/25 md:block [animation-delay:1.3s]"
+          className="animate-float-y absolute top-8 right-[6%] hidden size-9 rotate-12 text-emerald-600/15 md:block [animation-delay:1.3s]"
         />
         <IconKite
           aria-hidden="true"
-          className="animate-float-y absolute bottom-10 left-[2.5%] hidden size-11 -rotate-12 text-emerald-600/20 md:block [animation-delay:2.1s]"
+          className="animate-float-y absolute bottom-10 left-[2.5%] hidden size-11 -rotate-12 text-emerald-600/15 md:block [animation-delay:2.1s]"
         />
 
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 pt-12 pb-16 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-14 lg:pt-20 lg:pb-20">
+        {/* Three grid children so the receipts row sits under the headline on
+            desktop (col 1, row 2) but after the search card on phones (plain
+            DOM order) — the CTA stays within the first swipe either way. */}
+        <div className="mx-auto grid max-w-6xl gap-10 px-4 pt-10 pb-16 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:grid-rows-[auto_auto] lg:gap-x-14 lg:gap-y-8 lg:pt-16 lg:pb-20">
           <div className="animate-rise-in">
             <p className="inline-flex -rotate-1 items-center gap-1.5 rounded-lg border-2 border-white bg-amber-100 px-3 py-1 text-xs font-bold tracking-wide text-amber-900 uppercase shadow-sm">
-              <IconSparkle aria-hidden="true" className="size-3.5" />
+              <IconLock aria-hidden="true" className="size-3.5" />
               Free · no accounts · no tracking
             </p>
-            <h1 className="mt-4 font-display text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-[3.4rem] lg:leading-[1.06]">
+            <h1 className="mt-4 font-display text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-[3.4rem] lg:leading-[1.06] xl:text-6xl xl:leading-[1.05]">
               Your 40 hours are{" "}
               <span className="relative inline-block whitespace-nowrap">
                 out there.
@@ -91,34 +112,94 @@ export default function HomePage() {
               </span>
               <span className="block text-emerald-700">Let&apos;s go find them.</span>
             </h1>
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-slate-600">
+            <p className="mt-4 max-w-lg text-lg leading-relaxed text-slate-600">
               A hand-checked directory of animal shelters, food pantries, libraries,
               and more that actually welcome high school volunteers — and will sign
               off on your service hours.
             </p>
 
-            <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-slate-600">
-              <li className="flex items-center gap-1.5">
-                <IconPin aria-hidden="true" className="size-4 text-emerald-700" />
-                {opportunities.length} real places
+            {/* The trust numbers, loud: these three facts are the pitch. */}
+            <ul className="mt-8 grid max-w-xl grid-cols-3 gap-3 sm:gap-4">
+              <li>
+                <span className="relative inline-block font-display text-4xl font-extrabold tracking-tight text-emerald-800 tabular-nums sm:text-5xl">
+                  {opportunities.length}
+                  <SquiggleUnderline className="absolute -bottom-1 left-0 h-2.5 w-full text-amber-400" />
+                </span>
+                <span className="mt-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-800">
+                  <IconPin aria-hidden="true" className="size-4 shrink-0 text-emerald-700" />
+                  real places
+                </span>
+                <span className="mt-0.5 block text-xs font-semibold text-slate-500">
+                  hand-checked, real contact info
+                </span>
               </li>
-              <li className="flex items-center gap-1.5">
-                <IconLaptop aria-hidden="true" className="size-4 text-emerald-700" />
-                {virtualCount} doable from home
+              <li className="sm:border-l-2 sm:border-dashed sm:border-stone-200 sm:pl-5">
+                <span className="inline-block font-display text-4xl font-extrabold tracking-tight text-emerald-800 tabular-nums sm:text-5xl">
+                  {virtualCount}
+                </span>
+                <span className="mt-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-800">
+                  <IconLaptop aria-hidden="true" className="size-4 shrink-0 text-emerald-700" />
+                  doable from home
+                </span>
+                <span className="mt-0.5 block text-xs font-semibold text-slate-500">
+                  no ride needed
+                </span>
               </li>
-              <li className="flex items-center gap-1.5">
-                <IconLock aria-hidden="true" className="size-4 text-emerald-700" />
-                zero accounts required
+              <li className="sm:border-l-2 sm:border-dashed sm:border-stone-200 sm:pl-5">
+                <span className="inline-block font-display text-4xl font-extrabold tracking-tight text-emerald-800 tabular-nums sm:text-5xl">
+                  0
+                </span>
+                <span className="mt-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-800">
+                  <IconLock aria-hidden="true" className="size-4 shrink-0 text-emerald-700" />
+                  accounts, ever
+                </span>
+                <span className="mt-0.5 block text-xs font-semibold text-slate-500">
+                  nothing to sign up for
+                </span>
               </li>
             </ul>
           </div>
 
-          {/* The search card sits on a couple of tilted paper layers, like a
-              form someone actually handed you. */}
-          <div className="animate-rise-in relative [animation-delay:150ms]">
-            <div aria-hidden="true" className="absolute inset-0 -rotate-2 rounded-3xl bg-amber-200/70" />
-            <div aria-hidden="true" className="absolute inset-0 rotate-1 rounded-3xl bg-emerald-200/50" />
+          {/* The search card: one clean elevation, held to the page by a strip
+              of "tape" — same vocabulary as the safety note further down. */}
+          <div className="animate-rise-in relative [animation-delay:150ms] lg:col-start-2 lg:row-start-1 lg:row-span-2">
+            <span
+              aria-hidden="true"
+              className="absolute -top-3 left-8 z-10 h-6 w-16 -rotate-3 rounded-[3px] bg-amber-200/80 shadow-sm"
+            />
             <HomeSearchPanel />
+          </div>
+
+          {/* Receipts: a few real listings you can actually tap. */}
+          <div className="animate-rise-in [animation-delay:250ms] lg:col-start-1 lg:row-start-2 lg:self-end">
+            <p className="inline-block -rotate-1 text-xs font-bold text-slate-500">
+              actual listings, not stock photos
+            </p>
+            <ul className="mt-2.5 flex flex-wrap items-center gap-2">
+              {receipts.map((o, i) => {
+                const Icon = CATEGORY_META[o.category].icon;
+                return (
+                  <li key={o.id} className="max-w-full">
+                    <Link
+                      href={`/opportunities/${o.id}`}
+                      style={{ "--tilt": `${RECEIPT_TILTS[i % RECEIPT_TILTS.length]}deg` } as CSSProperties}
+                      className="ease-pop inline-flex max-w-full rotate-[var(--tilt)] items-center gap-1.5 rounded-lg border border-stone-200 bg-stone-50 px-2.5 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition-all duration-150 hover:rotate-0 hover:border-emerald-600 hover:text-emerald-800"
+                    >
+                      <Icon aria-hidden="true" className="size-4 shrink-0 text-emerald-700" />
+                      {o.name}
+                    </Link>
+                  </li>
+                );
+              })}
+              <li>
+                <Link
+                  href="/opportunities"
+                  className="text-xs font-semibold text-emerald-700 hover:text-emerald-900"
+                >
+                  + {opportunities.length - receipts.length} more
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
       </section>
@@ -190,6 +271,9 @@ export default function HomePage() {
         </p>
       </section>
 
+      {/* ── Journal-powered picks (returning visitors only) ───────────── */}
+      <SuggestionsStrip opportunities={opportunities} />
+
       {/* ── How it works: sticky intro + journey rail ─────────────────── */}
       <section aria-labelledby="how-heading" className="border-y border-stone-200 bg-white">
         <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:grid lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-16">
@@ -199,12 +283,13 @@ export default function HomePage() {
                 How it works
               </h2>
               <p className="mt-2 leading-relaxed text-slate-600">
-                ServeFinder is a{" "}
+                Pitch In points you at good places, and your{" "}
                 <strong className="relative inline-block whitespace-nowrap">
-                  finder, not a tracker
+                  pocket journal
                   <SquiggleUnderline className="absolute -bottom-1 left-0 h-2 w-full text-amber-400" />
                 </strong>{" "}
-                — we point you at good places, and you take it from there.
+                quietly keeps score — on your device, never on a server. You take it
+                from there.
               </p>
               <Link
                 href="/about"
@@ -276,14 +361,15 @@ export default function HomePage() {
                   </span>
                 </h2>
                 <p className="mt-2 text-sm leading-relaxed text-emerald-100">
-                  ServeFinder is a plain directory of organizations&apos; public contact
+                  Pitch In is a plain directory of organizations&apos; public contact
                   info. There&apos;s nothing to sign up for, nothing to install, and
-                  nothing that follows your kid around the internet.
+                  nothing that follows your kid around the internet. Even the
+                  volunteer journal lives only in the browser on their device.
                 </p>
                 <ul className="mt-4 grid gap-2 text-sm font-semibold text-emerald-50 sm:grid-cols-3">
                   {[
                     "No accounts, ever",
-                    "Location stays on the device",
+                    "Location & journal stay on the device",
                     "Parents looped in by default",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-2">

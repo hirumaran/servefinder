@@ -20,6 +20,7 @@ import { ContactActions } from "@/components/detail/ContactActions";
 import { DetailMapSection } from "@/components/detail/DetailMapSection";
 import { DistanceNote } from "@/components/detail/DistanceNote";
 import { FavoriteButton } from "@/components/FavoriteButton";
+import { IconNotebook } from "@/components/icons";
 import { Badge } from "@/components/ui/Badge";
 import { CATEGORY_META } from "@/lib/categories";
 import { ageLabel, websiteHostname } from "@/lib/format";
@@ -278,6 +279,27 @@ export default async function OpportunityDetailPage({ params }: PageProps) {
               parent or guardian, and consider CC&apos;ing them on emails or having them
               nearby for calls. Never share more personal info than an org needs.
             </p>
+          </section>
+
+          {/* Journal hand-off: after a shift, one tap pre-fills the log form. */}
+          <section
+            aria-labelledby="log-heading"
+            className="print-hide rounded-2xl border border-amber-200 bg-amber-50 p-5"
+          >
+            <h2 id="log-heading" className="font-display text-lg font-bold text-slate-900">
+              Been here already?
+            </h2>
+            <p className="mt-1 text-sm leading-relaxed text-slate-700">
+              Add the shift to your journal — it stays on your device and counts
+              toward your 40 hours.
+            </p>
+            <Link
+              href={`/journal?log=${o.id}`}
+              className="mt-3 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-amber-300 bg-white px-4 text-sm font-bold text-amber-900 transition-colors hover:border-amber-500 hover:bg-amber-100"
+            >
+              <IconNotebook aria-hidden="true" className="size-4" />
+              Log it in my journal
+            </Link>
           </section>
 
           <section
