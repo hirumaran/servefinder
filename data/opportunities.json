@@ -1,0 +1,475 @@
+{
+  "$comment": "⚠️ PLACEHOLDER DATA — every listing below is FICTIONAL sample content (fake orgs, 555 phone numbers, example.org emails/websites) included so the app works out of the box. REPLACE with real, verified local organizations before launch. Gather real listings from public sources (local United Way, VolunteerMatch, JustServe, city/county volunteer portals, libraries, food banks, animal shelters, hospitals, parks & rec), confirm each org's contact info AND hour-verification policy directly with the org, and set lastVerified to the date you confirmed it. See README → 'Adding & editing opportunities'.",
+  "opportunities": [
+    {
+      "id": "whisker-city-animal-shelter",
+      "name": "Whisker City Animal Shelter",
+      "description": "A no-kill shelter caring for about 120 cats and dogs at a time. Teen volunteers socialize cats, walk dogs on the shelter's trail loop, help with laundry and feeding, and assist at weekend adoption events so animals meet potential families calm and happy.",
+      "category": "Animals",
+      "address": { "street": "48 Harding Ave", "city": "Somerville", "state": "MA", "zip": "02144" },
+      "lat": 42.3994,
+      "lng": -71.1218,
+      "contact": {
+        "phone": "(617) 555-0142",
+        "email": "volunteer@whiskercity.example.org",
+        "website": "https://whiskercity.example.org",
+        "contactPerson": "Maya Ortiz, Volunteer Coordinator"
+      },
+      "minAge": 16,
+      "parentalConsentRequired": true,
+      "verifiesHours": true,
+      "timeCommitment": "Ongoing",
+      "isVirtual": false,
+      "groupFriendly": false,
+      "requirements": [
+        "Volunteer application form",
+        "One 90-minute orientation session",
+        "Parent/guardian consent form for volunteers under 18",
+        "Commit to at least two shifts per month"
+      ],
+      "hoursNotes": "Bring your school's service-hour form to any shift — the volunteer coordinator signs forms at the front desk, and the shelter also keeps its own shift log if you need a printed record later.",
+      "howToStart": "Fill out the teen volunteer application on their website (fictional for this sample).\nAsk a parent/guardian to sign the consent form.\nAttend one orientation session (offered twice a month, Saturdays at 10am).\nSign up for shifts on the volunteer calendar.",
+      "lastVerified": "2026-06-10"
+    },
+    {
+      "id": "bay-state-food-bank",
+      "name": "Bay State Food Bank",
+      "description": "A regional food bank that distributes groceries to 90+ neighborhood pantries. Volunteers work in the sorting warehouse: inspecting donated food, packing family boxes, and labeling shipments. Shifts are two hours, music is on, and staff work alongside you the whole time.",
+      "category": "FoodAndHunger",
+      "address": { "street": "310 Southampton St", "city": "Boston", "state": "MA", "zip": "02118" },
+      "lat": 42.3305,
+      "lng": -71.0651,
+      "contact": {
+        "phone": "(617) 555-0177",
+        "email": "warehouse@baystatefoodbank.example.org",
+        "website": "https://baystatefoodbank.example.org",
+        "contactPerson": "Devon Clarke"
+      },
+      "minAge": 14,
+      "parentalConsentRequired": true,
+      "verifiesHours": true,
+      "timeCommitment": "Flexible",
+      "isVirtual": false,
+      "groupFriendly": true,
+      "requirements": [
+        "Online shift sign-up",
+        "Closed-toe shoes",
+        "Parent/guardian waiver for volunteers under 16"
+      ],
+      "hoursNotes": "The shift lead signs school forms at checkout, or the volunteer office can email your school a verification letter within a week — ask at the front desk.",
+      "howToStart": "Create a shift sign-up on their website (fictional for this sample) or call the warehouse line.\nPick any open two-hour sorting shift.\nHave a parent/guardian e-sign the waiver if you're under 16.\nShow up 10 minutes early for the safety walkthrough.",
+      "lastVerified": "2026-06-18"
+    },
+    {
+      "id": "neighborhood-table-community-meals",
+      "name": "Neighborhood Table Community Meals",
+      "description": "A weekly community dinner serving 150 neighbors every Thursday evening in a church hall (open to everyone, no religious participation involved). Teen volunteers set tables, plate and serve food, refill drinks, and help break down and clean up afterward.",
+      "category": "FoodAndHunger",
+      "address": { "street": "85 Dorchester Ave", "city": "Dorchester", "state": "MA", "zip": "02125" },
+      "lat": 42.3247,
+      "lng": -71.0568,
+      "contact": {
+        "phone": "(617) 555-0113",
+        "email": "hello@neighborhoodtable.example.org",
+        "contactPerson": "Ruth Adeyemi"
+      },
+      "minAge": 14,
+      "verifiesHours": true,
+      "timeCommitment": "EventBased",
+      "isVirtual": false,
+      "groupFriendly": true,
+      "requirements": ["Sign up by the Tuesday before", "Hair tied back for serving"],
+      "hoursNotes": "Ruth signs service-hour forms every Thursday at the end of the shift — just bring the form with you.",
+      "howToStart": "Call or email Ruth by Tuesday to reserve a spot for that week's dinner.\nArrive at 4:30pm for setup (dinner runs 5:30–7pm).\nBring your service-hour form to get it signed the same night.",
+      "lastVerified": "2026-05-30"
+    },
+    {
+      "id": "charles-riverbank-cleanup-crew",
+      "name": "Charles Riverbank Cleanup Crew",
+      "description": "A neighborhood group that meets one Saturday morning a month to pull trash and invasive plants from the riverbank paths along the Charles. Gloves, grabbers, and bags are provided. It's outdoor work at your own pace — bring friends, family, or a whole club.",
+      "category": "Environment",
+      "address": { "street": "Memorial Dr at Magazine Beach", "city": "Cambridge", "state": "MA", "zip": "02139" },
+      "lat": 42.3563,
+      "lng": -71.1119,
+      "contact": {
+        "email": "crew@riverbankcleanup.example.org",
+        "website": "https://riverbankcleanup.example.org"
+      },
+      "verifiesHours": false,
+      "timeCommitment": "EventBased",
+      "isVirtual": false,
+      "groupFriendly": true,
+      "requirements": ["Volunteers under 13 must come with an adult", "Wear clothes that can get muddy"],
+      "hoursNotes": "This is an informal neighborhood group — organizers can reply to an email confirming you attended, but they do not sign official school forms. If your school requires a signed form, confirm first whether an email counts.",
+      "howToStart": "Check the next cleanup date on their website (fictional for this sample).\nEmail the crew so they know to expect you and bring enough gear.\nShow up at the Magazine Beach meeting point at 9am — look for the green flags.",
+      "lastVerified": "2026-04-22"
+    },
+    {
+      "id": "golden-years-friendly-visitors",
+      "name": "Golden Years Friendly Visitors",
+      "description": "A senior center program that pairs teens with older adults for weekly one-hour visits: playing cards and board games, working on puzzles, or just chatting over tea. Many residents have few visitors, and a consistent friendly face genuinely changes their week.",
+      "category": "Seniors",
+      "address": { "street": "93 Winchester St", "city": "Brookline", "state": "MA", "zip": "02446" },
+      "lat": 42.3399,
+      "lng": -71.1257,
+      "contact": {
+        "phone": "(617) 555-0129",
+        "email": "visitors@goldenyears.example.org",
+        "contactPerson": "Frank DiMauro, Program Director"
+      },
+      "minAge": 15,
+      "parentalConsentRequired": true,
+      "verifiesHours": true,
+      "timeCommitment": "Ongoing",
+      "isVirtual": false,
+      "groupFriendly": false,
+      "requirements": [
+        "Interview with the program director",
+        "Parent/guardian consent form",
+        "Commit to the same weekly time slot for a semester",
+        "Brief training on communication and mobility awareness"
+      ],
+      "hoursNotes": "The front desk keeps a sign-in book; Frank signs school verification forms monthly or at the end of your commitment — whichever your school needs.",
+      "howToStart": "Email or call Frank to set up a short interview (they want to match you with the right resident).\nReturn the signed parent/guardian consent form.\nComplete the one-hour training session.\nStart your weekly visits — same day and time each week.",
+      "lastVerified": "2026-06-02"
+    },
+    {
+      "id": "letters-of-sunshine",
+      "name": "Letters of Sunshine (Virtual)",
+      "description": "A virtual program where volunteers hand-write or type cheerful letters and cards that are delivered to isolated seniors in local nursing homes. Write from home on your own schedule; the organization screens, prints, and delivers every letter.",
+      "category": "Seniors",
+      "address": { "street": "240 Elm St, Suite 12", "city": "Somerville", "state": "MA", "zip": "02144" },
+      "lat": 42.3958,
+      "lng": -71.1222,
+      "contact": {
+        "email": "write@lettersofsunshine.example.org",
+        "website": "https://lettersofsunshine.example.org"
+      },
+      "verifiesHours": true,
+      "timeCommitment": "Flexible",
+      "isVirtual": true,
+      "groupFriendly": true,
+      "requirements": ["Short online guidelines quiz (10 minutes)", "Letters reviewed before delivery"],
+      "hoursNotes": "They credit 30 minutes per accepted letter, tracked on your volunteer dashboard, and the coordinator emails signed verification letters to schools each semester. Confirm your school accepts emailed verification.",
+      "howToStart": "Register on their website (fictional for this sample) and take the short guidelines quiz.\nWrite your first letter using the prompt bank if you're not sure what to say.\nUpload or mail it in — you'll get a confirmation when it's delivered.",
+      "lastVerified": "2026-06-25"
+    },
+    {
+      "id": "riverview-medical-teen-volunteers",
+      "name": "Riverview Medical Center — Teen Volunteer Program",
+      "description": "A structured hospital program for high schoolers. Teen volunteers staff the information desk, escort visitors, deliver flowers and mail to patient rooms, restock family waiting areas, and help with office tasks. A classic choice for students interested in healthcare careers.",
+      "category": "HealthAndHospitals",
+      "address": { "street": "75 Francis St", "city": "Boston", "state": "MA", "zip": "02115" },
+      "lat": 42.3359,
+      "lng": -71.1076,
+      "contact": {
+        "phone": "(617) 555-0186",
+        "email": "teenvolunteers@riverviewmed.example.org",
+        "website": "https://riverviewmed.example.org/volunteer",
+        "contactPerson": "Volunteer Services Office"
+      },
+      "minAge": 16,
+      "parentalConsentRequired": true,
+      "verifiesHours": true,
+      "timeCommitment": "Ongoing",
+      "isVirtual": false,
+      "groupFriendly": false,
+      "requirements": [
+        "Application with one teacher reference",
+        "Interview with Volunteer Services",
+        "Immunization records + flu shot",
+        "Parent/guardian consent form",
+        "4-hour orientation and 50-hour minimum commitment over the school year"
+      ],
+      "hoursNotes": "Volunteer Services tracks every badge-in electronically and prints official signed hour letters on request — the gold standard for school documentation.",
+      "howToStart": "Apply online during an application window (fall and spring — check their website, fictional for this sample).\nAsk a teacher to submit your reference.\nComplete the interview, health forms, and orientation.\nPick a weekly shift for the semester.",
+      "lastVerified": "2026-06-20"
+    },
+    {
+      "id": "homework-heroes-online-tutoring",
+      "name": "Homework Heroes Online Tutoring (Virtual)",
+      "description": "A nonprofit that matches high school volunteers with elementary and middle school students for 45-minute homework help sessions over video call, mostly in math and reading. Training, session monitoring, and scheduling all happen through their platform — no car needed.",
+      "category": "EducationAndTutoring",
+      "address": { "street": "50 Milk St, Floor 15", "city": "Boston", "state": "MA", "zip": "02109" },
+      "lat": 42.3583,
+      "lng": -71.0578,
+      "contact": {
+        "email": "tutors@homeworkheroes.example.org",
+        "website": "https://homeworkheroes.example.org"
+      },
+      "minAge": 15,
+      "parentalConsentRequired": true,
+      "verifiesHours": true,
+      "timeCommitment": "Ongoing",
+      "isVirtual": true,
+      "groupFriendly": false,
+      "requirements": [
+        "Application with a short subject quiz",
+        "One-hour online tutor training",
+        "Parent/guardian permission form for tutors under 18",
+        "B or better in the subject you want to tutor"
+      ],
+      "hoursNotes": "The platform logs every session automatically; download a signed hour report from your dashboard any time. Their hour reports are accepted by most schools — confirm with your counselor.",
+      "howToStart": "Apply at their website (fictional for this sample) and pick your strongest subject.\nPass the short subject quiz and finish the online training.\nSet your weekly availability — sessions are matched automatically.",
+      "lastVerified": "2026-06-28"
+    },
+    {
+      "id": "maplewood-library-teen-corps",
+      "name": "Maplewood Public Library — Teen Corps",
+      "description": "The library's teen volunteer crew shelves returned books, preps craft kits for children's storytime, helps run summer reading sign-ups, and sets up for author events. Quiet, air-conditioned, and great for students who like organized, independent work.",
+      "category": "Library",
+      "address": { "street": "111 High St", "city": "Medford", "state": "MA", "zip": "02155" },
+      "lat": 42.4184,
+      "lng": -71.1062,
+      "contact": {
+        "phone": "(781) 555-0158",
+        "email": "teens@maplewoodlibrary.example.org",
+        "website": "https://maplewoodlibrary.example.org/teens",
+        "contactPerson": "Jess Park, Teen Services Librarian"
+      },
+      "minAge": 13,
+      "verifiesHours": true,
+      "timeCommitment": "Flexible",
+      "isVirtual": false,
+      "groupFriendly": false,
+      "requirements": ["Teen Corps sign-up sheet (available at the front desk)", "Short shelving tutorial"],
+      "hoursNotes": "Jess signs school forms on the spot and the library logs your hours in their system as a backup — one of the easiest places to get documented hours.",
+      "howToStart": "Stop by the teen desk or email Jess to join Teen Corps.\nDo the 20-minute shelving tutorial on your first visit.\nSign up for one- or two-hour blocks whenever the library is open.",
+      "lastVerified": "2026-06-15"
+    },
+    {
+      "id": "harborline-childrens-museum-docents",
+      "name": "Harborline Children's Museum — Junior Docents",
+      "description": "Junior docents welcome families, demo hands-on science exhibits, run the build-a-boat water table, and help with birthday party setup at this waterfront children's museum. Training covers each exhibit, so you always know what to show and say.",
+      "category": "ArtsAndMuseums",
+      "address": { "street": "308 Congress St", "city": "Boston", "state": "MA", "zip": "02210" },
+      "lat": 42.3521,
+      "lng": -71.0498,
+      "contact": {
+        "phone": "(617) 555-0195",
+        "email": "docents@harborline.example.org",
+        "website": "https://harborline.example.org/join",
+        "contactPerson": "Volunteer Office"
+      },
+      "minAge": 14,
+      "parentalConsentRequired": true,
+      "verifiesHours": true,
+      "timeCommitment": "Ongoing",
+      "isVirtual": false,
+      "groupFriendly": false,
+      "requirements": [
+        "Application + short interview",
+        "Two Saturday training sessions",
+        "Parent/guardian consent form",
+        "One 3-hour shift per week during the school year"
+      ],
+      "hoursNotes": "The volunteer office tracks shifts by badge and signs school hour forms at the end of each month.",
+      "howToStart": "Apply on the museum website (fictional for this sample).\nComplete a 15-minute interview with the volunteer office.\nAttend both Saturday trainings.\nChoose your weekly shift.",
+      "lastVerified": "2026-05-12"
+    },
+    {
+      "id": "blue-hills-trail-days",
+      "name": "Friends of the Blue Hills — Trail Days",
+      "description": "Monthly volunteer days maintaining hiking trails in the Blue Hills Reservation: clearing brush, fixing water bars, blazing trails, and repairing bog bridges. Tools and training provided. Hard outdoor work with a crew — you'll see exactly what you accomplished by lunch.",
+      "category": "ParksAndOutdoors",
+      "address": { "street": "695 Hillside St", "city": "Milton", "state": "MA", "zip": "02186" },
+      "lat": 42.2119,
+      "lng": -71.0985,
+      "contact": {
+        "email": "traildays@bluehillsfriends.example.org",
+        "website": "https://bluehillsfriends.example.org"
+      },
+      "verifiesHours": true,
+      "timeCommitment": "EventBased",
+      "isVirtual": false,
+      "groupFriendly": true,
+      "requirements": [
+        "Online registration for each trail day",
+        "Volunteers under 14 must bring an adult",
+        "Sturdy shoes, long pants, and a water bottle"
+      ],
+      "hoursNotes": "The crew leader signs hour forms at the trailhead when the workday wraps up — bring your form in a zip-lock bag so it survives the hike.",
+      "howToStart": "Register for the next Trail Day on their website (fictional for this sample).\nIf you're under 14, bring a parent/guardian or another adult.\nMeet at the Hillside St trailhead at 9am with water and sturdy shoes.",
+      "lastVerified": "2026-06-07"
+    },
+    {
+      "id": "jp-main-streets-festival-crew",
+      "name": "JP Main Streets — Festival & Events Crew",
+      "description": "The neighborhood business association runs street festivals, sidewalk sales, holiday lightings, and a fall 5K. Event crew volunteers set up tables and tents, hand out programs, staff water stations, guide foot traffic, and tear down afterward. High energy, lots of people.",
+      "category": "Community",
+      "address": { "street": "659 Centre St", "city": "Jamaica Plain", "state": "MA", "zip": "02130" },
+      "lat": 42.3126,
+      "lng": -71.1141,
+      "contact": {
+        "phone": "(617) 555-0104",
+        "email": "events@jpmainstreets.example.org",
+        "website": "https://jpmainstreets.example.org",
+        "contactPerson": "Carlos Vega"
+      },
+      "minAge": 14,
+      "verifiesHours": true,
+      "timeCommitment": "EventBased",
+      "isVirtual": false,
+      "groupFriendly": true,
+      "requirements": ["Sign up per event", "Comfortable being on your feet for a few hours"],
+      "hoursNotes": "Carlos signs forms at the volunteer check-in tent at every event. Clubs can get one group letter listing every member's hours.",
+      "howToStart": "Email Carlos or check the events page (fictional for this sample) for the next event.\nSign up for a setup, during-event, or teardown slot.\nCheck in at the volunteer tent 15 minutes before your slot.",
+      "lastVerified": "2026-06-22"
+    },
+    {
+      "id": "interfaith-neighbors-pantry",
+      "name": "Interfaith Neighbors Pantry",
+      "description": "A food pantry run jointly by several Quincy congregations, open to all neighbors regardless of faith (volunteering involves no religious activity). Volunteers stock shelves, pack grocery bags, greet clients, and help carry bags to cars on Saturday mornings.",
+      "category": "FaithBased",
+      "address": { "street": "18 Cottage Ave", "city": "Quincy", "state": "MA", "zip": "02169" },
+      "lat": 42.2519,
+      "lng": -71.0023,
+      "contact": {
+        "phone": "(617) 555-0170",
+        "email": "pantry@interfaithneighbors.example.org",
+        "contactPerson": "Grace Liu"
+      },
+      "verifiesHours": true,
+      "timeCommitment": "Flexible",
+      "isVirtual": false,
+      "groupFriendly": true,
+      "requirements": ["Volunteers under 12 must come with an adult", "Sign in at the volunteer book each shift"],
+      "hoursNotes": "Grace signs school forms any Saturday; the sign-in book serves as the official record if your school asks for backup documentation.",
+      "howToStart": "Call or email Grace to say which Saturday you'd like to come.\nArrive at 8:30am for a quick tour on your first day.\nSign the volunteer book at the start and end of each shift.",
+      "lastVerified": "2026-05-17"
+    },
+    {
+      "id": "ride-together-adaptive-cycling",
+      "name": "Ride Together Adaptive Cycling",
+      "description": "A program that gets riders with physical and developmental disabilities out on adaptive bikes along the Charles River paths. Volunteers help fit helmets, stabilize bikes at mounting, ride alongside as buddies, and cheer loudly. Training provided; patience and enthusiasm required.",
+      "category": "DisabilityServices",
+      "address": { "street": "400 Moody St", "city": "Waltham", "state": "MA", "zip": "02453" },
+      "lat": 42.3702,
+      "lng": -71.2378,
+      "contact": {
+        "phone": "(781) 555-0136",
+        "email": "buddies@ridetogether.example.org",
+        "website": "https://ridetogether.example.org",
+        "contactPerson": "Sam Whitfield"
+      },
+      "minAge": 16,
+      "parentalConsentRequired": true,
+      "verifiesHours": true,
+      "timeCommitment": "Ongoing",
+      "isVirtual": false,
+      "groupFriendly": false,
+      "requirements": [
+        "Volunteer application",
+        "CORI background check (they file it for you)",
+        "2-hour ride-buddy training",
+        "Comfortable riding a bike"
+      ],
+      "hoursNotes": "Session leads log hours after each ride and Sam emails signed verification letters to schools at semester's end — or signs paper forms on site if you bring one.",
+      "howToStart": "Apply on their website (fictional for this sample).\nComplete the background check paperwork they send you.\nAttend one ride-buddy training session.\nSign up for Saturday morning ride sessions (April–October).",
+      "lastVerified": "2026-06-05"
+    },
+    {
+      "id": "hope-kitchen-shelter-support",
+      "name": "Hope Kitchen — Shelter Meal Support",
+      "description": "The community kitchen inside a downtown shelter serves dinner to 200 guests nightly. Teen volunteers (16+) prep vegetables, assemble trays, serve on the line, and reset the dining room. Staff coach you through everything; guests are the point, dignity is the rule.",
+      "category": "Homelessness",
+      "address": { "street": "29 Kingston St", "city": "Boston", "state": "MA", "zip": "02111" },
+      "lat": 42.3527,
+      "lng": -71.0603,
+      "contact": {
+        "phone": "(617) 555-0163",
+        "email": "kitchen@hopekitchen.example.org",
+        "website": "https://hopekitchen.example.org",
+        "contactPerson": "Volunteer Desk"
+      },
+      "minAge": 16,
+      "parentalConsentRequired": true,
+      "verifiesHours": true,
+      "timeCommitment": "Ongoing",
+      "isVirtual": false,
+      "groupFriendly": true,
+      "requirements": [
+        "Online volunteer registration",
+        "Parent/guardian consent form for minors",
+        "15-minute kitchen safety briefing on your first shift",
+        "Closed-toe shoes; hair tied back"
+      ],
+      "hoursNotes": "The volunteer desk stamps and signs hour forms after every shift — no waiting, no follow-up emails needed.",
+      "howToStart": "Register on their website (fictional for this sample) and pick a dinner shift (4–7pm).\nHave a parent/guardian sign the consent form.\nArrive by 3:45pm for the safety briefing on your first day.",
+      "lastVerified": "2026-06-26"
+    },
+    {
+      "id": "little-leaders-afterschool",
+      "name": "Little Leaders Afterschool Program",
+      "description": "An afterschool program serving K–5 kids in Roxbury. Teen volunteers run homework tables, referee gym games, lead art projects, and read with early readers, Monday–Thursday from 3 to 5:30pm. Kids look up to teen helpers in a way adults can't replicate.",
+      "category": "Youth",
+      "address": { "street": "120 Dudley St", "city": "Roxbury", "state": "MA", "zip": "02119" },
+      "lat": 42.3284,
+      "lng": -71.0812,
+      "contact": {
+        "phone": "(617) 555-0148",
+        "email": "volunteer@littleleaders.example.org",
+        "website": "https://littleleaders.example.org",
+        "contactPerson": "Tanya Brooks, Site Director"
+      },
+      "minAge": 15,
+      "parentalConsentRequired": true,
+      "verifiesHours": true,
+      "timeCommitment": "Ongoing",
+      "isVirtual": false,
+      "groupFriendly": false,
+      "requirements": [
+        "Application + interview with the site director",
+        "CORI background check (processed by the program)",
+        "Commit to the same weekday each week for a semester"
+      ],
+      "hoursNotes": "Tanya signs weekly or semester hour forms — her sign-off is well known to local school counselors.",
+      "howToStart": "Email Tanya to schedule a visit and interview.\nComplete the background check form the program gives you.\nPick your weekly afternoon and start shadowing a staff member.",
+      "lastVerified": "2026-06-12"
+    },
+    {
+      "id": "mapforgood-mapping-nights",
+      "name": "MapForGood Digital Mapping Nights (Virtual)",
+      "description": "Volunteers trace buildings and roads from satellite imagery into OpenStreetMap so disaster-relief and public-health teams can find communities that aren't on any map. Join a guided two-hour virtual mapping night from home — a laptop and a mouse are all you need.",
+      "category": "Environment",
+      "address": { "street": "1 Broadway, Floor 5", "city": "Cambridge", "state": "MA", "zip": "02142" },
+      "lat": 42.3629,
+      "lng": -71.0846,
+      "contact": {
+        "email": "events@mapforgood.example.org",
+        "website": "https://mapforgood.example.org"
+      },
+      "verifiesHours": true,
+      "timeCommitment": "EventBased",
+      "isVirtual": true,
+      "groupFriendly": true,
+      "requirements": ["Free OpenStreetMap account", "Laptop with a mouse (trackpads are painful)", "Register for each event"],
+      "hoursNotes": "Organizers email a signed participation certificate with your mapped-task count after each event; most schools accept it — confirm with your counselor first.",
+      "howToStart": "Register for the next mapping night on their website (fictional for this sample).\nCreate a free OpenStreetMap account before the event.\nJoin the video call — the first 30 minutes teach you everything.",
+      "lastVerified": "2026-06-30"
+    },
+    {
+      "id": "newton-repair-cafe",
+      "name": "Newton Repair Café",
+      "description": "A monthly pop-up where neighbors bring broken lamps, torn jackets, and wobbly chairs, and volunteers fix them together instead of throwing them away. Teens help at the welcome desk, track repair tickets, assist fixers by fetching tools and parts, and learn repair skills hands-on.",
+      "category": "Other",
+      "address": { "street": "429 Cherry St", "city": "Newton", "state": "MA", "zip": "02465" },
+      "lat": 42.3494,
+      "lng": -71.2249,
+      "contact": {
+        "email": "fixers@newtonrepaircafe.example.org",
+        "website": "https://newtonrepaircafe.example.org",
+        "contactPerson": "Priya Raman"
+      },
+      "minAge": 14,
+      "verifiesHours": false,
+      "timeCommitment": "EventBased",
+      "isVirtual": false,
+      "groupFriendly": true,
+      "requirements": ["RSVP for each café date", "Curiosity about how things work"],
+      "hoursNotes": "This is an all-volunteer pop-up: Priya is happy to confirm attendance by email, but there's no official form-signing process. Check whether your school accepts an organizer email before counting on these hours.",
+      "howToStart": "RSVP for the next café date by email (fictional for this sample).\nArrive 30 minutes before doors open to learn the ticket system.\nHelp at the welcome desk or shadow a fixer — your choice.",
+      "lastVerified": "2026-04-05"
+    }
+  ]
+}
