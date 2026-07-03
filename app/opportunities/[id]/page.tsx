@@ -35,6 +35,9 @@ export function generateStaticParams() {
   return getAllOpportunities().map((o) => ({ id: o.id }));
 }
 
+// The dataset is the complete universe of ids: anything else is a real 404.
+export const dynamicParams = false;
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
   const o = getOpportunityById(id);
