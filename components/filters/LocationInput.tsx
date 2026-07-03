@@ -1,7 +1,8 @@
 "use client";
 
-import { LocateFixed, MapPin, X } from "lucide-react";
 import { useRef, useState } from "react";
+
+import { IconCompass, IconPin, IconX } from "@/components/icons";
 
 import { isValidZip, ZIP_ERROR_MESSAGES, zipToCoords } from "@/lib/geocode";
 import { useUserLocation } from "@/lib/location-context";
@@ -119,7 +120,7 @@ export function LocationInput({ zip, onZipCommit, idPrefix }: LocationInputProps
 
       <div className="flex flex-wrap gap-2">
         <div className="relative min-w-36 flex-1">
-          <MapPin
+          <IconPin
             aria-hidden="true"
             className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-slate-400"
           />
@@ -141,9 +142,9 @@ export function LocationInput({ zip, onZipCommit, idPrefix }: LocationInputProps
           type="button"
           onClick={useMyLocation}
           disabled={busy === "geo"}
-          className="inline-flex h-12 cursor-pointer items-center gap-2 rounded-xl border border-stone-300 bg-white px-4 text-sm font-semibold text-slate-700 transition-colors hover:border-emerald-600 hover:text-emerald-800 disabled:cursor-wait disabled:opacity-60"
+          className="inline-flex h-12 cursor-pointer items-center gap-2 rounded-xl border border-stone-300 bg-white px-4 text-sm font-semibold text-slate-700 transition-all duration-150 hover:border-emerald-600 hover:text-emerald-800 active:scale-95 disabled:cursor-wait disabled:opacity-60"
         >
-          <LocateFixed aria-hidden="true" className="size-4" />
+          <IconCompass aria-hidden="true" className="size-4" />
           {busy === "geo" ? "Locating…" : "Use my location"}
         </button>
       </div>
@@ -160,9 +161,9 @@ export function LocationInput({ zip, onZipCommit, idPrefix }: LocationInputProps
             <button
               type="button"
               onClick={clearLocation}
-              className="inline-flex min-h-11 cursor-pointer items-center gap-1 rounded-full bg-stone-200 px-3 text-sm font-semibold text-slate-700 hover:bg-stone-300"
+              className="inline-flex min-h-11 cursor-pointer items-center gap-1 rounded-full bg-stone-200 px-3 text-sm font-semibold text-slate-700 transition-all duration-150 hover:bg-stone-300 active:scale-95"
             >
-              <X aria-hidden="true" className="size-3.5" />
+              <IconX aria-hidden="true" className="size-3.5" />
               Clear<span className="sr-only"> location</span>
             </button>
           </span>

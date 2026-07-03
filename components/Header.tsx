@@ -1,8 +1,9 @@
 "use client";
 
-import { Sprout } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
+import { IconSprout } from "@/components/icons";
 
 const NAV_LINKS = [
   { href: "/opportunities", label: "Find opportunities" },
@@ -21,12 +22,11 @@ export function Header() {
       >
         <Link
           href="/"
-          className="flex items-center gap-2 rounded-lg"
+          className="group flex items-center gap-2 rounded-lg"
           aria-label="ServeFinder home"
         >
-          <span className="flex size-9 items-center justify-center rounded-xl bg-emerald-700 text-white">
-            <Sprout aria-hidden="true" className="size-5" />
-          </span>
+          {/* The sprout gives a happy little wiggle when you hover the logo. */}
+          <IconSprout className="size-8 text-emerald-700 transition-transform duration-300 ease-pop group-hover:-rotate-6 group-hover:scale-110" />
           <span className="font-display text-xl font-extrabold tracking-tight text-slate-900">
             Serve<span className="text-emerald-700">Finder</span>
           </span>
@@ -40,7 +40,7 @@ export function Header() {
                 <Link
                   href={href}
                   aria-current={active ? "page" : undefined}
-                  className={`inline-flex min-h-11 items-center rounded-xl px-3 text-sm font-semibold transition-colors sm:px-4 ${
+                  className={`inline-flex min-h-11 items-center rounded-xl px-3 text-sm font-semibold transition-all duration-150 active:scale-95 sm:px-4 ${
                     active
                       ? "bg-emerald-50 text-emerald-800"
                       : "text-slate-600 hover:bg-stone-100 hover:text-slate-900"

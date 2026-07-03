@@ -1,10 +1,10 @@
-import type { LucideIcon } from "lucide-react";
+import type { ComponentType, SVGProps } from "react";
 
 interface BadgeProps {
   children: React.ReactNode;
   /** Full Tailwind classes for colors, e.g. "bg-emerald-100 text-emerald-900". */
   colorClass?: string;
-  icon?: LucideIcon;
+  icon?: ComponentType<SVGProps<SVGSVGElement>>;
   /** Extra context for screen readers when the visible text is terse. */
   srLabel?: string;
 }

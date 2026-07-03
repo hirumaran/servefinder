@@ -1,4 +1,8 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
 
 /*
  * Design tokens. ServeFinder uses Tailwind's built-in palette:
@@ -10,10 +14,156 @@
 @theme inline {
   --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-nunito), var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-nunito), var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+
+  /* shadcn semantic tokens, mapped onto the existing palette so any
+     registry component automatically wears ServeFinder's colors. */
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+}
+
+:root {
+  --background: var(--color-stone-50);
+  --foreground: var(--color-slate-900);
+  --card: var(--color-white);
+  --card-foreground: var(--color-slate-900);
+  --popover: var(--color-white);
+  --popover-foreground: var(--color-slate-900);
+  --primary: var(--color-emerald-700);
+  --primary-foreground: var(--color-white);
+  --secondary: var(--color-stone-100);
+  --secondary-foreground: var(--color-slate-800);
+  --muted: var(--color-stone-100);
+  --muted-foreground: var(--color-slate-600);
+  --accent: var(--color-emerald-50);
+  --accent-foreground: var(--color-emerald-800);
+  --destructive: var(--color-red-600);
+  --border: var(--color-stone-200);
+  --input: var(--color-stone-300);
+  --ring: var(--color-emerald-600);
+  --radius: 0.625rem;
+}
+
+/*
+ * Motion system. One shared vocabulary so every animation on the site has
+ * the same rhythm: quick, settled, a little springy — never floaty.
+ */
+@theme {
+  --ease-settle: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --animate-rise-in: rise-in 0.55s var(--ease-settle) both;
+  --animate-pop-in: pop-in 0.45s var(--ease-pop) both;
+  --animate-float-y: float-y 5s ease-in-out infinite;
+  --animate-wiggle: wiggle 0.4s var(--ease-pop);
+
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes pop-in {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  @keyframes float-y {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-7px);
+    }
+  }
+  @keyframes wiggle {
+    0%,
+    100% {
+      transform: rotate(0deg);
+    }
+    30% {
+      transform: rotate(-3deg);
+    }
+    60% {
+      transform: rotate(2deg);
+    }
+  }
+}
+
+/* Hand-drawn underline squiggles draw themselves in on load. */
+@keyframes draw-stroke {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.draw-in {
+  stroke-dasharray: var(--draw-length, 300);
+  stroke-dashoffset: var(--draw-length, 300);
+  animation: draw-stroke 0.9s var(--ease-settle) 0.35s forwards;
+}
+
+/* Scroll reveal (used by <Reveal>): hidden until it enters the viewport.
+   Only hidden when scripting is available — no-JS visitors see everything. */
+@media (scripting: enabled) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.6s var(--ease-settle),
+    transform 0.6s var(--ease-settle);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .draw-in {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    animation: none;
+  }
 }
 
 body {
   background-color: var(--color-stone-50);
+  color: var(--color-slate-900);
+}
+
+/* Selecting text feels on-brand too. */
+::selection {
+  background-color: var(--color-amber-200);
   color: var(--color-slate-900);
 }
 
@@ -62,5 +212,21 @@ body {
   a {
     text-decoration: none;
     color: inherit;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  html {
+    @apply font-sans;
   }
 }

@@ -1,5 +1,7 @@
-import { ShieldCheck } from "lucide-react";
 import Link from "next/link";
+
+import { SquiggleDivider } from "@/components/doodles";
+import { IconShieldHeart, IconSprout } from "@/components/icons";
 
 /** Site-wide footer with the safety/accuracy disclaimers required everywhere. */
 export function Footer() {
@@ -8,7 +10,8 @@ export function Footer() {
       <div className="mx-auto max-w-6xl space-y-6 px-4 py-10 sm:px-6">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
           <div className="max-w-md space-y-2">
-            <p className="font-display text-lg font-extrabold text-slate-900">
+            <p className="flex items-center gap-1.5 font-display text-lg font-extrabold text-slate-900">
+              <IconSprout aria-hidden="true" className="size-5 text-emerald-700" />
               Serve<span className="text-emerald-700">Finder</span>
             </p>
             <p className="text-sm leading-relaxed text-slate-600">
@@ -43,14 +46,19 @@ export function Footer() {
           </nav>
         </div>
 
-        <div className="flex items-start gap-2 rounded-xl bg-stone-100 p-4 text-sm text-slate-600">
-          <ShieldCheck aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-emerald-700" />
+        <div className="flex items-start gap-2.5 rounded-xl bg-stone-100 p-4 text-sm text-slate-600">
+          <IconShieldHeart aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-emerald-700" />
           <p>
             Details can change. Always confirm hours, age rules, and whether the
             organization signs service-hour forms <em>before</em> you show up — and
             loop in a parent or guardian when you reach out. This site never asks for
             an account and never stores your location.
           </p>
+        </div>
+
+        <div className="flex items-center gap-3 text-xs text-slate-500">
+          <SquiggleDivider className="h-2 w-14 text-emerald-300" />
+          <p>Made for students who&apos;d rather be out helping.</p>
         </div>
       </div>
     </footer>
