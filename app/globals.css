@@ -1,26 +1,66 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/*
+ * Design tokens. ServeFinder uses Tailwind's built-in palette:
+ *   - Primary: emerald (trust / service / community)
+ *   - Accent:  amber   (warm highlights)
+ *   - Neutrals: stone surfaces + slate text
+ * Fonts come from next/font CSS variables set in app/layout.tsx.
+ */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-nunito), var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-stone-50);
+  color: var(--color-slate-900);
+}
+
+/* One consistent, clearly visible focus style everywhere (keyboard users). */
+:focus-visible {
+  outline: 3px solid var(--color-emerald-600);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.leaflet-container {
+  font-family: var(--font-sans);
+}
+
+/* Round Leaflet popups to match the card design. */
+.leaflet-popup-content-wrapper {
+  border-radius: 0.75rem;
+}
+.leaflet-popup-content {
+  margin: 0.75rem 1rem;
+}
+
+/* Respect users who prefer reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/*
+ * Print styles: students sometimes print a detail page to hand to a counselor.
+ * Hide navigation/interactive chrome and let the content breathe.
+ */
+@media print {
+  .print-hide {
+    display: none !important;
+  }
+  body {
+    background: white;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 }
