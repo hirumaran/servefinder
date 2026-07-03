@@ -8,17 +8,13 @@ import { Badge } from "@/components/ui/Badge";
 import { CATEGORY_META } from "@/lib/categories";
 import { formatMiles } from "@/lib/distance";
 import type { ScoredOpportunity } from "@/lib/filters";
+import { ageLabel } from "@/lib/format";
 import { TIME_COMMITMENT_LABELS } from "@/lib/types";
 
 interface OpportunityCardProps {
   result: ScoredOpportunity;
   /** True when this card's map pin is selected — shown as a ring. */
   highlighted: boolean;
-}
-
-/** Human age label: "Ages 16+" or "No age minimum". */
-export function ageLabel(minAge: number | undefined): string {
-  return minAge === undefined ? "No age minimum" : `Ages ${minAge}+`;
 }
 
 /**
