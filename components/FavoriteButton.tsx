@@ -31,7 +31,7 @@ export function FavoriteButton({ opportunityId, opportunityName }: FavoriteButto
       className={`inline-flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-full border transition-colors ${
         active
           ? "border-rose-200 bg-rose-50 text-rose-600"
-          : "border-stone-200 bg-white text-slate-400 hover:border-rose-200 hover:text-rose-500"
+          : "border-stone-200 bg-white text-slate-500 hover:border-rose-200 hover:text-rose-500"
       }`}
     >
       <Heart aria-hidden="true" className="size-5" fill={active ? "currentColor" : "none"} />

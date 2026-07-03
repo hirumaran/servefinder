@@ -51,7 +51,7 @@ export function HomeSearchPanel() {
             placeholder="Try “animals”, “food bank”, “tutoring”…"
             value={filters.q}
             onChange={(e) => update({ q: e.target.value })}
-            className="h-13 w-full rounded-xl border border-stone-300 bg-white pr-3 pl-10 text-base text-slate-900 placeholder:text-slate-400"
+            className="h-13 w-full rounded-xl border border-stone-300 bg-white pr-3 pl-10 text-base text-slate-900 placeholder:text-slate-500"
           />
         </div>
       </div>

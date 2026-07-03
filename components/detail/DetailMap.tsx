@@ -36,7 +36,8 @@ export function DetailMap({ opportunity }: { opportunity: Opportunity }) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Marker position={[opportunity.lat, opportunity.lng]} icon={icon} alt={opportunity.name}>
+      {/* divIcon markers ignore `alt`; `title` gives an accessible name. */}
+      <Marker position={[opportunity.lat, opportunity.lng]} icon={icon} title={opportunity.name}>
         <Popup>
           <span className="text-sm font-bold">{opportunity.name}</span>
           <br />

@@ -97,7 +97,8 @@ export function ResultsMap({
         <Marker
           position={[userLocation.lat, userLocation.lng]}
           icon={userDotIcon}
-          alt="Your location"
+          // divIcon markers ignore `alt`; `title` gives an accessible name.
+          title="Your location"
           keyboard={false}
         >
           <Popup>Your location</Popup>
@@ -111,7 +112,9 @@ export function ResultsMap({
             key={o.id}
             position={[o.lat, o.lng]}
             icon={pinIcon(meta.pinColor, selectedId === o.id)}
-            alt={o.name}
+            // divIcon markers ignore `alt`; `title` gives keyboard/screen-reader
+            // users an accessible name on the focusable pin.
+            title={o.name}
             eventHandlers={{ click: () => onSelect(o.id) }}
           >
             <Popup>

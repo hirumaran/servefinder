@@ -4,6 +4,7 @@ import { Download, Pencil, Plus, Save, Trash2, X } from "lucide-react";
 import { useState } from "react";
 
 import { CATEGORY_META } from "@/lib/categories";
+import { isValidHttpUrl } from "@/lib/format";
 import {
   CATEGORIES,
   TIME_COMMITMENTS,
@@ -116,6 +117,10 @@ function fromForm(form: FormState, existingIds: string[]): Opportunity | string 
   const lng = Number.parseFloat(form.lng);
   if (Number.isNaN(lat) || lat < -90 || lat > 90) return "Latitude must be between -90 and 90.";
   if (Number.isNaN(lng) || lng < -180 || lng > 180) return "Longitude must be between -180 and 180.";
+
+  if (form.website.trim() && !isValidHttpUrl(form.website.trim())) {
+    return "Website must be a full URL starting with https:// (or left blank).";
+  }
 
   const minAge = form.minAge.trim() === "" ? undefined : Number.parseInt(form.minAge, 10);
   if (minAge !== undefined && (Number.isNaN(minAge) || minAge < 0 || minAge > 25)) {

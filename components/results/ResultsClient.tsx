@@ -62,34 +62,65 @@ export function ResultsClient({ opportunities }: ResultsClientProps) {
     [searchParams]
   );
 
-  function updateFilters(patch: Partial<Filters>) {
-    const query = serializeFilters({ ...filters, ...patch });
-    router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
-  }
-
-  // ── Keyword input, debounced into the URL ─────────────────────────────
   const [qInput, setQInput] = useState(filters.q);
   const debounceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  function commitFilters(patch: Partial<Filters>) {
+    // Merge against the URL's *live* state, never this render's snapshot —
+    // a debounced commit can fire after other filter changes have landed,
+    // and must not silently revert them.
+    const current = parseFilters(new URLSearchParams(window.location.search));
+    const query = serializeFilters({ ...current, ...patch });
+    router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
+  }
+
+  function updateFilters(patch: Partial<Filters>) {
+    // If a keyword commit is pending, fold it in now instead of letting the
+    // timer fire later against whatever this change writes to the URL.
+    if (debounceTimer.current !== null) {
+      clearTimeout(debounceTimer.current);
+      debounceTimer.current = null;
+      patch = { q: qInput, ...patch };
+    }
+    commitFilters(patch);
+  }
+
+  // ── Keyword input, debounced into the URL ─────────────────────────────
   useEffect(() => {
     // Follow external URL changes (back button, clear-all) — but never
     // clobber what the user is mid-typing (i.e. while a debounce is pending).
     if (debounceTimer.current === null) setQInput(filters.q);
   }, [filters.q]);
 
+  // Never let a pending commit fire after this page unmounts (e.g. the user
+  // clicked through to a detail page during the 300ms window).
+  useEffect(
+    () => () => {
+      if (debounceTimer.current !== null) clearTimeout(debounceTimer.current);
+    },
+    []
+  );
+
   function handleKeywordChange(value: string) {
     setQInput(value);
-    if (debounceTimer.current) clearTimeout(debounceTimer.current);
+    if (debounceTimer.current !== null) clearTimeout(debounceTimer.current);
     debounceTimer.current = setTimeout(() => {
       debounceTimer.current = null;
-      updateFilters({ q: value });
+      commitFilters({ q: value });
     }, KEYWORD_DEBOUNCE_MS);
   }
 
   // ── Hydrate location from a shared ?zip= link ─────────────────────────
   const attemptedZip = useRef<string | null>(null);
   useEffect(() => {
-    if (location || !filters.zip || attemptedZip.current === filters.zip) return;
+    if (location) {
+      // Remember which ZIP the active location came from. When the user
+      // clears it, `location` empties before the URL catches up — without
+      // this marker we'd instantly re-hydrate the ZIP they just cleared.
+      if (location.source === "zip" && location.zip) attemptedZip.current = location.zip;
+      return;
+    }
+    if (!filters.zip || attemptedZip.current === filters.zip) return;
     attemptedZip.current = filters.zip;
     void zipToCoords(filters.zip).then((result) => {
       if (result.ok) {
@@ -147,6 +178,11 @@ export function ResultsClient({ opportunities }: ResultsClientProps) {
   const hasAnyFilter = activeFilterCount > 0 || filters.zip !== "" || location !== null;
 
   function clearAll() {
+    // Cancel any pending keyword commit so it can't resurrect cleared filters.
+    if (debounceTimer.current !== null) {
+      clearTimeout(debounceTimer.current);
+      debounceTimer.current = null;
+    }
     setShowSavedOnly(false);
     setLocation(null);
     attemptedZip.current = null;
@@ -185,7 +221,7 @@ export function ResultsClient({ opportunities }: ResultsClientProps) {
               placeholder="Search by keyword…"
               value={qInput}
               onChange={(e) => handleKeywordChange(e.target.value)}
-              className="h-12 w-full rounded-xl border border-stone-300 bg-white pr-3 pl-10 text-base text-slate-900 placeholder:text-slate-400"
+              className="h-12 w-full rounded-xl border border-stone-300 bg-white pr-3 pl-10 text-base text-slate-900 placeholder:text-slate-500"
             />
           </div>
           <button
@@ -242,6 +278,11 @@ export function ResultsClient({ opportunities }: ResultsClientProps) {
               · add a ZIP or use your location to see distances
             </span>
           )}
+          {location !== null && filters.radius !== null && (
+            <span className="block text-slate-500 sm:ml-1 sm:inline">
+              · virtual listings are always included
+            </span>
+          )}
         </p>
 
         <div className="flex flex-wrap items-center gap-2">
@@ -252,7 +293,7 @@ export function ResultsClient({ opportunities }: ResultsClientProps) {
               onClick={() => setShowSavedOnly((v) => !v)}
               className={`inline-flex min-h-11 cursor-pointer items-center gap-1.5 rounded-full border px-3.5 text-sm font-semibold transition-colors ${
                 showSavedOnly
-                  ? "border-rose-500 bg-rose-500 text-white"
+                  ? "border-rose-600 bg-rose-600 text-white"
                   : "border-stone-300 bg-white text-slate-700 hover:border-rose-400 hover:text-rose-600"
               }`}
             >

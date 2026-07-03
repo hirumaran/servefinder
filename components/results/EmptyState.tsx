@@ -15,9 +15,9 @@ export function EmptyState({ onWidenRadius, onTryVirtual, onClearFilters }: Empt
   return (
     <div className="rounded-2xl border border-dashed border-stone-300 bg-white px-6 py-12 text-center">
       <SearchX aria-hidden="true" className="mx-auto size-10 text-slate-300" />
-      <h3 className="font-display mt-3 text-lg font-bold text-slate-900">
+      <h2 className="font-display mt-3 text-lg font-bold text-slate-900">
         No opportunities match yet
-      </h3>
+      </h2>
       <p className="mx-auto mt-1 max-w-sm text-sm leading-relaxed text-slate-600">
         Don&apos;t give up — try widening your search radius, or check out virtual
         opportunities you can do from home.

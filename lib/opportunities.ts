@@ -13,6 +13,7 @@
 
 import rawData from "@/data/opportunities.json";
 
+import { isValidHttpUrl } from "./format";
 import { CATEGORIES, TIME_COMMITMENTS, type Opportunity } from "./types";
 
 function fail(id: string, message: string): never {
@@ -63,6 +64,13 @@ function validateOpportunity(raw: unknown, seenIds: Set<string>): Opportunity {
 
   if (typeof o.contact !== "object" || o.contact === null) {
     fail(id, '"contact" is required (use {} if truly unknown, but every listing should have at least one contact method)');
+  }
+  const website = (o.contact as Record<string, unknown>).website;
+  if (website !== undefined) {
+    assertNonEmptyString(id, "contact.website", website);
+    if (!isValidHttpUrl(website)) {
+      fail(id, '"contact.website" must be a full URL including the scheme, e.g. https://example.org');
+    }
   }
 
   for (const field of ["verifiesHours", "isVirtual", "groupFriendly"] as const) {

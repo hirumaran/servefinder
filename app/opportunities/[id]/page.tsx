@@ -22,7 +22,7 @@ import { DistanceNote } from "@/components/detail/DistanceNote";
 import { FavoriteButton } from "@/components/FavoriteButton";
 import { Badge } from "@/components/ui/Badge";
 import { CATEGORY_META } from "@/lib/categories";
-import { ageLabel } from "@/lib/format";
+import { ageLabel, websiteHostname } from "@/lib/format";
 import { getAllOpportunities, getOpportunityById } from "@/lib/opportunities";
 import { TIME_COMMITMENT_LABELS } from "@/lib/types";
 
@@ -58,7 +58,9 @@ export default async function OpportunityDetailPage({ params }: PageProps) {
   // Plain directions URLs — just links, no map API keys or billing involved.
   const googleDirections = `https://www.google.com/maps/dir/?api=1&destination=${o.lat}%2C${o.lng}`;
   const appleDirections = `https://maps.apple.com/?daddr=${o.lat},${o.lng}`;
-  const websiteHost = o.contact.website ? new URL(o.contact.website).hostname : null;
+  // The validator enforces well-formed website URLs; this stays defensive
+  // anyway so one bad record could never take down the whole build.
+  const websiteHost = websiteHostname(o.contact.website);
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 sm:py-8">

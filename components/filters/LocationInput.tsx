@@ -57,6 +57,15 @@ export function LocationInput({ zip, onZipCommit, idPrefix }: LocationInputProps
     const cleaned = value.replace(/\D/g, "").slice(0, 5);
     setZipInput(cleaned);
     setError(null);
+    // Emptying the field while a ZIP location is active clears the filter —
+    // otherwise results would stay sorted by a ZIP the input no longer shows.
+    if (cleaned === "" && location?.source === "zip") {
+      lookupSeq.current++; // abandon any in-flight lookup
+      setBusy(null);
+      setLocation(null);
+      onZipCommit("");
+      return;
+    }
     // Look up automatically once we have 5 digits — no extra button press.
     if (isValidZip(cleaned) && cleaned !== location?.zip) void lookUpZip(cleaned);
   }
@@ -66,6 +75,7 @@ export function LocationInput({ zip, onZipCommit, idPrefix }: LocationInputProps
       setError("Your browser doesn't support location. Try entering a ZIP instead.");
       return;
     }
+    lookupSeq.current++; // a slow ZIP lookup must not clobber this choice
     setBusy("geo");
     setError(null);
     navigator.geolocation.getCurrentPosition(
@@ -91,6 +101,8 @@ export function LocationInput({ zip, onZipCommit, idPrefix }: LocationInputProps
   }
 
   function clearLocation() {
+    lookupSeq.current++; // abandon any in-flight lookup
+    setBusy(null);
     setLocation(null);
     setZipInput("");
     setError(null);
@@ -121,7 +133,7 @@ export function LocationInput({ zip, onZipCommit, idPrefix }: LocationInputProps
             onChange={(e) => handleZipChange(e.target.value)}
             aria-describedby={`${idPrefix}-zip-status ${idPrefix}-privacy`}
             aria-invalid={error ? true : undefined}
-            className="h-12 w-full rounded-xl border border-stone-300 bg-white pr-3 pl-9 text-base text-slate-900 placeholder:text-slate-400"
+            className="h-12 w-full rounded-xl border border-stone-300 bg-white pr-3 pl-9 text-base text-slate-900 placeholder:text-slate-500"
           />
         </div>
 
@@ -148,9 +160,9 @@ export function LocationInput({ zip, onZipCommit, idPrefix }: LocationInputProps
             <button
               type="button"
               onClick={clearLocation}
-              className="inline-flex cursor-pointer items-center gap-1 rounded-full bg-stone-200 px-2 py-0.5 text-xs font-semibold text-slate-700 hover:bg-stone-300"
+              className="inline-flex min-h-11 cursor-pointer items-center gap-1 rounded-full bg-stone-200 px-3 text-sm font-semibold text-slate-700 hover:bg-stone-300"
             >
-              <X aria-hidden="true" className="size-3" />
+              <X aria-hidden="true" className="size-3.5" />
               Clear<span className="sr-only"> location</span>
             </button>
           </span>
@@ -158,7 +170,8 @@ export function LocationInput({ zip, onZipCommit, idPrefix }: LocationInputProps
       </div>
 
       <p id={`${idPrefix}-privacy`} className="text-xs text-slate-500">
-        Only used in your browser to show distances — never stored or sent anywhere.
+        Used only to show distances. A ZIP you type appears in the page address so
+        searches can be shared; your precise device location never leaves your browser.
       </p>
     </div>
   );

@@ -36,7 +36,7 @@ export function OpportunityCard({ result, highlighted }: OpportunityCardProps) {
     >
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <h3 className="font-display text-lg leading-snug font-bold text-slate-900">
+          <h2 className="font-display text-lg leading-snug font-bold text-slate-900">
             {/* after:absolute inset-0 stretches this link across the card. */}
             <Link
               href={`/opportunities/${o.id}`}
@@ -44,7 +44,7 @@ export function OpportunityCard({ result, highlighted }: OpportunityCardProps) {
             >
               {o.name}
             </Link>
-          </h3>
+          </h2>
           <p className="mt-0.5 flex flex-wrap items-center gap-x-2 text-sm text-slate-500">
             <span className="inline-flex items-center gap-1">
               <MapPin aria-hidden="true" className="size-3.5" />
