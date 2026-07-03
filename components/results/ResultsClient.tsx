@@ -15,7 +15,6 @@ import { SortSelect } from "@/components/results/SortSelect";
 import { useFavorites } from "@/lib/favorites-context";
 import {
   applyFilters,
-  DEFAULT_FILTERS,
   parseFilters,
   RADIUS_OPTIONS,
   serializeFilters,
@@ -76,7 +75,6 @@ export function ResultsClient({ opportunities }: ResultsClientProps) {
     // Follow external URL changes (back button, clear-all) — but never
     // clobber what the user is mid-typing (i.e. while a debounce is pending).
     if (debounceTimer.current === null) setQInput(filters.q);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters.q]);
 
   function handleKeywordChange(value: string) {

@@ -1,7 +1,7 @@
 "use client";
 
 import { LocateFixed, MapPin, X } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import { isValidZip, ZIP_ERROR_MESSAGES, zipToCoords } from "@/lib/geocode";
 import { useUserLocation } from "@/lib/location-context";
@@ -30,9 +30,12 @@ export function LocationInput({ zip, onZipCommit, idPrefix }: LocationInputProps
   const lookupSeq = useRef(0);
 
   // If the parent's ZIP changes from elsewhere (URL nav, clear-all), follow it.
-  useEffect(() => {
+  // Adjusting state during render (not in an effect) avoids a cascading pass.
+  const [prevZipProp, setPrevZipProp] = useState(zip);
+  if (prevZipProp !== zip) {
+    setPrevZipProp(zip);
     setZipInput(zip);
-  }, [zip]);
+  }
 
   async function lookUpZip(candidate: string) {
     const seq = ++lookupSeq.current;
