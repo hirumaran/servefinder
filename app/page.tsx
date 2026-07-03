@@ -118,43 +118,50 @@ export default function HomePage() {
               off on your service hours.
             </p>
 
-            {/* The trust numbers, loud: these three facts are the pitch. */}
-            <ul className="mt-8 grid max-w-xl grid-cols-3 gap-3 sm:gap-4">
-              <li>
-                <span className="relative inline-block font-display text-4xl font-extrabold tracking-tight text-emerald-800 tabular-nums sm:text-5xl">
+            {/* The trust numbers, loud: these three facts are the pitch.
+                Ledger rows on phones (numeral | label), columns from sm up. */}
+            <ul className="mt-8 grid max-w-2xl divide-y-2 divide-dashed divide-stone-200 sm:grid-cols-3 sm:gap-4 sm:divide-y-0">
+              <li className="flex items-center gap-4 pb-3 sm:block sm:pb-0">
+                <span className="relative inline-block w-14 shrink-0 font-display text-4xl font-extrabold tracking-tight text-emerald-800 tabular-nums sm:w-auto sm:text-5xl">
                   {opportunities.length}
                   <SquiggleUnderline className="absolute -bottom-1 left-0 h-2.5 w-full text-amber-400" />
                 </span>
-                <span className="mt-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-800">
-                  <IconPin aria-hidden="true" className="size-4 shrink-0 text-emerald-700" />
-                  real places
-                </span>
-                <span className="mt-0.5 block text-xs font-semibold text-slate-500">
-                  hand-checked, real contact info
+                <span className="block sm:mt-1.5">
+                  <span className="flex items-center gap-1.5 text-sm font-bold text-slate-800">
+                    <IconPin aria-hidden="true" className="size-4 shrink-0 text-emerald-700" />
+                    real places
+                  </span>
+                  <span className="mt-0.5 block text-xs font-semibold text-slate-500">
+                    every one hand-checked
+                  </span>
                 </span>
               </li>
-              <li className="sm:border-l-2 sm:border-dashed sm:border-stone-200 sm:pl-5">
-                <span className="inline-block font-display text-4xl font-extrabold tracking-tight text-emerald-800 tabular-nums sm:text-5xl">
+              <li className="flex items-center gap-4 py-3 sm:block sm:border-l-2 sm:border-dashed sm:border-stone-200 sm:py-0 sm:pl-4">
+                <span className="inline-block w-14 shrink-0 font-display text-4xl font-extrabold tracking-tight text-emerald-800 tabular-nums sm:w-auto sm:text-5xl">
                   {virtualCount}
                 </span>
-                <span className="mt-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-800">
-                  <IconLaptop aria-hidden="true" className="size-4 shrink-0 text-emerald-700" />
-                  doable from home
-                </span>
-                <span className="mt-0.5 block text-xs font-semibold text-slate-500">
-                  no ride needed
+                <span className="block sm:mt-1.5">
+                  <span className="flex items-center gap-1.5 text-sm font-bold text-slate-800">
+                    <IconLaptop aria-hidden="true" className="size-4 shrink-0 text-emerald-700" />
+                    doable from home
+                  </span>
+                  <span className="mt-0.5 block text-xs font-semibold text-slate-500">
+                    no ride needed
+                  </span>
                 </span>
               </li>
-              <li className="sm:border-l-2 sm:border-dashed sm:border-stone-200 sm:pl-5">
-                <span className="inline-block font-display text-4xl font-extrabold tracking-tight text-emerald-800 tabular-nums sm:text-5xl">
+              <li className="flex items-center gap-4 pt-3 sm:block sm:border-l-2 sm:border-dashed sm:border-stone-200 sm:pt-0 sm:pl-4">
+                <span className="inline-block w-14 shrink-0 font-display text-4xl font-extrabold tracking-tight text-emerald-800 tabular-nums sm:w-auto sm:text-5xl">
                   0
                 </span>
-                <span className="mt-1.5 flex items-center gap-1.5 text-sm font-bold text-slate-800">
-                  <IconLock aria-hidden="true" className="size-4 shrink-0 text-emerald-700" />
-                  accounts, ever
-                </span>
-                <span className="mt-0.5 block text-xs font-semibold text-slate-500">
-                  nothing to sign up for
+                <span className="block sm:mt-1.5">
+                  <span className="flex items-center gap-1.5 text-sm font-bold text-slate-800">
+                    <IconLock aria-hidden="true" className="size-4 shrink-0 text-emerald-700" />
+                    accounts, ever
+                  </span>
+                  <span className="mt-0.5 block text-xs font-semibold text-slate-500">
+                    nothing to sign up for
+                  </span>
                 </span>
               </li>
             </ul>
@@ -165,7 +172,7 @@ export default function HomePage() {
           <div className="animate-rise-in relative [animation-delay:150ms] lg:col-start-2 lg:row-start-1 lg:row-span-2">
             <span
               aria-hidden="true"
-              className="absolute -top-3 left-8 z-10 h-6 w-16 -rotate-3 rounded-[3px] bg-amber-200/80 shadow-sm"
+              className="absolute -top-3 left-8 z-10 h-6 w-16 -rotate-6 rounded-[3px] bg-amber-200/80 shadow-sm"
             />
             <HomeSearchPanel />
           </div>
