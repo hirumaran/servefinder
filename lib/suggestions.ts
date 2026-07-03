@@ -1,88 +1,69 @@
 /**
- * "What next?" suggestions computed from the journal.
+ * "Picked for you" suggestions computed from the causes a student chose.
  *
- * Pure functions, no storage: given past experiences and the full listing set,
- * rank the places the student hasn't logged yet by how well they match the
- * causes they keep coming back to. All scoring happens in the browser, so a
- * student's interests never leave their device (see lib/experiences.ts).
+ * Pure functions, no storage: given the picked causes (see lib/interests.ts)
+ * and the full listing set, line up the best matches. All scoring happens in
+ * the browser, so a student's interests never leave their device.
  */
 
-import type { Experience } from "./experiences";
+import { CATEGORY_META } from "./categories";
 import type { Category, Opportunity } from "./types";
 
 export interface Suggestion {
   opportunity: Opportunity;
-  /** Human reason shown under the card, e.g. "Because you volunteered with …". */
+  /** Human reason shown under the card, e.g. "Because you picked Animals". */
   reason: string;
   score: number;
 }
 
-/** How many of the most recent shifts get the "current interests" boost. */
-const RECENT_SHIFTS = 3;
-const RECENCY_BOOST = 1.5;
+/** Verified sign-off matters most to students — it outranks everything else. */
+const VERIFIES_HOURS_BOOST = 0.5;
 
 export function suggestOpportunities(
-  experiences: readonly Experience[],
+  interests: readonly Category[],
   opportunities: readonly Opportunity[],
-  limit = 3
+  limit = 6
 ): Suggestion[] {
-  if (experiences.length === 0) return [];
+  if (interests.length === 0) return [];
 
-  const byId = new Map(opportunities.map((o) => [o.id, o]));
+  const picked = new Set(interests);
 
-  // Interest profile: hours poured into each cause. Recent shifts count extra
-  // so tastes can drift, and every entry counts at least one hour so a short
-  // shift still registers as real interest.
-  const newestFirst = [...experiences].sort(
-    (a, b) => b.date.localeCompare(a.date) || b.loggedAt.localeCompare(a.loggedAt)
-  );
-  const categoryWeight = new Map<Category, number>();
-  const latestOrgForCategory = new Map<Category, string>();
-  const loggedIds = new Set<string>();
-  const loggedOrgNames = new Set<string>();
-
-  newestFirst.forEach((exp, index) => {
-    const weight = Math.max(exp.hours, 1) * (index < RECENT_SHIFTS ? RECENCY_BOOST : 1);
-    categoryWeight.set(exp.category, (categoryWeight.get(exp.category) ?? 0) + weight);
-    if (!latestOrgForCategory.has(exp.category)) {
-      latestOrgForCategory.set(exp.category, exp.orgName);
-    }
-    if (exp.opportunityId) loggedIds.add(exp.opportunityId);
-    loggedOrgNames.add(exp.orgName.trim().toLowerCase());
-  });
-
-  // Secondary taste signal: a student whose logged listings lean virtual
-  // probably wants more from-home options.
-  const linkedListings = newestFirst
-    .map((e) => (e.opportunityId ? byId.get(e.opportunityId) : undefined))
-    .filter((o): o is Opportunity => o !== undefined);
-  const leansVirtual =
-    linkedListings.length > 0 &&
-    linkedListings.filter((o) => o.isVirtual).length * 2 >= linkedListings.length;
-
-  const scored: Suggestion[] = [];
+  // Bucket candidates by cause, best-first within each bucket: places that
+  // sign hour forms beat places that don't, then a stable name sort.
+  const buckets = new Map<Category, Opportunity[]>();
   for (const o of opportunities) {
-    // Never suggest somewhere they've already logged (by listing or by name).
-    if (loggedIds.has(o.id)) continue;
-    if (loggedOrgNames.has(o.name.trim().toLowerCase())) continue;
-
-    // Only suggest causes they've actually shown interest in — an empty
-    // section is better than a random one pretending to know them.
-    const base = categoryWeight.get(o.category) ?? 0;
-    if (base === 0) continue;
-
-    let score = base;
-    if (o.verifiesHours) score += 0.5; // students need the sign-off
-    if (o.isVirtual && leansVirtual) score += 0.5;
-
-    scored.push({
-      opportunity: o,
-      reason: `Because you volunteered with ${latestOrgForCategory.get(o.category)}`,
-      score,
-    });
+    if (!picked.has(o.category)) continue;
+    const bucket = buckets.get(o.category);
+    if (bucket) bucket.push(o);
+    else buckets.set(o.category, [o]);
+  }
+  for (const bucket of buckets.values()) {
+    bucket.sort(
+      (a, b) =>
+        Number(b.verifiesHours) - Number(a.verifiesHours) || a.name.localeCompare(b.name)
+    );
   }
 
-  return scored
-    .sort((a, b) => b.score - a.score || a.opportunity.name.localeCompare(b.opportunity.name))
-    .slice(0, limit);
+  // Deal one listing per cause per round, in pick order, so someone who chose
+  // three causes sees all three represented — not one cause's whole roster.
+  const dealOrder = interests.filter((c) => buckets.has(c));
+  const suggestions: Suggestion[] = [];
+  for (let round = 0; suggestions.length < limit; round++) {
+    let dealt = false;
+    for (const category of dealOrder) {
+      const o = buckets.get(category)?.[round];
+      if (!o) continue;
+      suggestions.push({
+        opportunity: o,
+        reason: `Because you picked ${CATEGORY_META[o.category].label}`,
+        score: 1 + (o.verifiesHours ? VERIFIES_HOURS_BOOST : 0),
+      });
+      dealt = true;
+      if (suggestions.length >= limit) break;
+    }
+    // Every bucket ran dry before the limit — done.
+    if (!dealt) break;
+  }
+
+  return suggestions;
 }

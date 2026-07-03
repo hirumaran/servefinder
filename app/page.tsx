@@ -2,15 +2,15 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 
 import { SquiggleConnector, SquiggleUnderline } from "@/components/doodles";
+import { ForYouSection } from "@/components/home/ForYouSection";
 import { HomeSearchPanel } from "@/components/home/HomeSearchPanel";
-import { SuggestionsStrip } from "@/components/home/SuggestionsStrip";
 import {
   IconArrowRight,
   IconCheck,
+  IconCompass,
   IconKite,
   IconLaptop,
   IconLock,
-  IconNotebook,
   IconPaw,
   IconPin,
   IconSearch,
@@ -18,16 +18,19 @@ import {
   IconSignCheck,
   IconSpeech,
 } from "@/components/icons";
+import { OnboardingFlow } from "@/components/onboarding/OnboardingFlow";
 import { Reveal } from "@/components/Reveal";
 import { CATEGORY_META } from "@/lib/categories";
 import { getAllOpportunities } from "@/lib/opportunities";
 import { CATEGORIES } from "@/lib/types";
 
 /**
- * Home / Search. The hero search card is the primary CTA; everything below it
- * (causes, how-it-works, safety) supports first-time visitors who don't know
- * what to search for yet. Layout leans "hand-placed": tilted sticker chips,
- * squiggle accents, and an off-center hero instead of stacked centered bands.
+ * Home / the dash. First-time visitors get the onboarding flow (Monet front
+ * door → how it works → pick your causes) played over this page; everyone
+ * else lands straight on it: search up top, "picked for you" matches from
+ * their causes right under, browse-all and safety below. Layout leans
+ * "hand-placed": tilted sticker chips, squiggle accents, and an off-center
+ * hero instead of stacked centered bands.
  */
 
 /** Deterministic sticker tilts so the cause wall looks hand-placed, not random. */
@@ -65,9 +68,9 @@ const STEPS = [
     body: "Confirm the details, show up, help out. Bring your hour form — orgs marked “Verifies hours” will sign it.",
   },
   {
-    icon: IconNotebook,
-    title: "Jot it in your journal",
-    body: "Log the shift and your hours — it stays on your device, keeps your 40-hour tally, and sharpens what we suggest next.",
+    icon: IconCompass,
+    title: "Come back for round two",
+    body: "The causes you picked live on your device and keep fresh matches waiting on this page. Forty hours goes quick when it's stuff you like.",
   },
 ] as const;
 
@@ -83,6 +86,9 @@ export default function HomePage() {
 
   return (
     <div>
+      {/* First-visit onboarding: Monet front door → how it works → causes. */}
+      <OnboardingFlow />
+
       {/* ── Hero + search ─────────────────────────────────────────────── */}
       <section className="relative overflow-hidden border-b border-stone-200 bg-white">
         {/* Margin doodles — decorative only, out of the way on small screens. */}
@@ -211,6 +217,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── Picked for you: matches from the causes they chose ────────── */}
+      <ForYouSection opportunities={opportunities} />
+
       {/* ── Browse by cause: the sticker wall ─────────────────────────── */}
       <section aria-labelledby="causes-heading" className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
         <div className="flex flex-wrap items-end justify-between gap-3">
@@ -278,9 +287,6 @@ export default function HomePage() {
         </p>
       </section>
 
-      {/* ── Journal-powered picks (returning visitors only) ───────────── */}
-      <SuggestionsStrip opportunities={opportunities} />
-
       {/* ── How it works: sticky intro + journey rail ─────────────────── */}
       <section aria-labelledby="how-heading" className="border-y border-stone-200 bg-white">
         <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:grid lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-16">
@@ -290,13 +296,12 @@ export default function HomePage() {
                 How it works
               </h2>
               <p className="mt-2 leading-relaxed text-slate-600">
-                Pitch In points you at good places, and your{" "}
+                Servd points you at good places that match{" "}
                 <strong className="relative inline-block whitespace-nowrap">
-                  pocket journal
+                  your causes
                   <SquiggleUnderline className="absolute -bottom-1 left-0 h-2 w-full text-amber-400" />
                 </strong>{" "}
-                quietly keeps score — on your device, never on a server. You take it
-                from there.
+                — matched on your device, never on a server. You take it from there.
               </p>
               <Link
                 href="/about"
@@ -368,15 +373,15 @@ export default function HomePage() {
                   </span>
                 </h2>
                 <p className="mt-2 text-sm leading-relaxed text-emerald-100">
-                  Pitch In is a plain directory of organizations&apos; public contact
+                  Servd is a plain directory of organizations&apos; public contact
                   info. There&apos;s nothing to sign up for, nothing to install, and
-                  nothing that follows your kid around the internet. Even the
-                  volunteer journal lives only in the browser on their device.
+                  nothing that follows your kid around the internet. Even the causes
+                  they pick live only in the browser on their device.
                 </p>
                 <ul className="mt-4 grid gap-2 text-sm font-semibold text-emerald-50 sm:grid-cols-3">
                   {[
                     "No accounts, ever",
-                    "Location & journal stay on the device",
+                    "Location & causes stay on the device",
                     "Parents looped in by default",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-2">

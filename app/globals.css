@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design tokens. Pitch In uses Tailwind's built-in palette:
+ * Design tokens. Servd uses Tailwind's built-in palette:
  *   - Primary: emerald (trust / service / community)
  *   - Accent:  amber   (warm highlights)
  *   - Neutrals: stone surfaces + slate text
@@ -17,7 +17,7 @@
   --font-heading: var(--font-nunito), var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
 
   /* shadcn semantic tokens, mapped onto the existing palette so any
-     registry component automatically wears Pitch In's colors. */
+     registry component automatically wears Servd's colors. */
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -159,6 +159,30 @@
 body {
   background-color: var(--color-stone-50);
   color: var(--color-slate-900);
+}
+
+/*
+ * First-visit intro. The boot script in app/layout.tsx flags brand-new
+ * visitors on <html> before first paint, so the onboarding overlay is
+ * visible from the very first frame for them — and never flashes for
+ * returning visitors, crawlers, or no-JS readers (who keep display:none).
+ */
+.onboarding-overlay {
+  display: none;
+}
+html[data-servd-intro] .onboarding-overlay {
+  display: block;
+}
+html[data-servd-intro] body {
+  overflow: hidden;
+}
+
+/* Client-only sections (e.g. "Picked for you") vanish without JS instead of
+   showing a skeleton forever — same spirit as the .reveal scripting gate. */
+@media (scripting: none) {
+  .js-only {
+    display: none !important;
+  }
 }
 
 /* Selecting text feels on-brand too. */

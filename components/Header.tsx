@@ -7,7 +7,6 @@ import { IconSprout } from "@/components/icons";
 
 const NAV_LINKS = [
   { href: "/opportunities", label: "Find opportunities" },
-  { href: "/journal", label: "My journal" },
   { href: "/about", label: "How it works" },
 ] as const;
 
@@ -24,12 +23,12 @@ export function Header() {
         <Link
           href="/"
           className="group flex items-center gap-2 rounded-lg"
-          aria-label="Pitch In home"
+          aria-label="Servd home"
         >
           {/* The sprout gives a happy little wiggle when you hover the logo. */}
           <IconSprout className="size-8 text-emerald-700 transition-transform duration-300 ease-pop group-hover:-rotate-6 group-hover:scale-110" />
           <span className="font-display text-xl font-extrabold tracking-tight text-slate-900">
-            Pitch&nbsp;<span className="text-emerald-700">In</span>
+            Serv<span className="text-emerald-700">d</span>
           </span>
         </Link>
 

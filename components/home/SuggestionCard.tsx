@@ -6,9 +6,9 @@ import { CATEGORY_META } from "@/lib/categories";
 import type { Suggestion } from "@/lib/suggestions";
 
 /**
- * One "what next?" pick, shown on the journal page and the home strip.
- * Same stretched-link recipe as OpportunityCard, plus the personal reason
- * ("Because you volunteered with …") as a little amber sticky note.
+ * One "picked for you" match on the home dash. Same stretched-link recipe as
+ * OpportunityCard, plus the personal reason ("Because you picked …") as a
+ * little amber sticky note.
  */
 export function SuggestionCard({ suggestion }: { suggestion: Suggestion }) {
   const o = suggestion.opportunity;

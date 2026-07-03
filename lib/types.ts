@@ -1,5 +1,5 @@
 /**
- * Core data model for Pitch In.
+ * Core data model for Servd.
  *
  * `Opportunity` is the single source-of-truth shape for every listing in
  * `data/opportunities.json`. It is deliberately storage-agnostic: today the

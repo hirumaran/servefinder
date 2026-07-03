@@ -1,7 +1,7 @@
 import type { SVGProps } from "react";
 
 /**
- * Pitch In's hand-inked icon set.
+ * Servd's hand-inked icon set.
  *
  * Every icon is drawn by hand on a 32×32 grid to feel like felt-tip doodles
  * in the margin of a notebook — nothing here comes from a stock icon pack.

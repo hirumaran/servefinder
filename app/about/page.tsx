@@ -14,7 +14,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "How it works & safety",
   description:
-    "What Pitch In is (a finder with an on-device journal), how the 40-hour requirement works, and how to stay safe when contacting organizations.",
+    "What Servd is (a finder that matches the causes you pick), how the 40-hour requirement works, and how to stay safe when contacting organizations.",
 };
 
 /** Static explainer: the 40-hour requirement, scope, safety, and disclaimers. */
@@ -22,7 +22,7 @@ export default function AboutPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
       <h1 className="font-display text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-        How Pitch In works
+        How Servd works
       </h1>
       <p className="mt-3 text-lg leading-relaxed text-slate-600">
         Most high schools require <strong>40 hours of community service</strong> to
@@ -37,32 +37,32 @@ export default function AboutPage() {
           className="font-display flex items-center gap-2 text-2xl font-extrabold text-slate-900"
         >
           <Compass aria-hidden="true" className="size-6 text-emerald-700" />
-          A finder — with a pocket journal
+          A finder — not a tracker
         </h2>
         <p className="mt-2 leading-relaxed text-slate-700">
-          Pitch In is a <strong>directory</strong> at heart. We curate local volunteer
+          Servd is a <strong>directory</strong> at heart. We curate local volunteer
           opportunities and show you what each organization does, how far away it is,
           the age rules, and — crucially — whether it will sign off on your service
-          hours. Alongside that sits your{" "}
+          hours. When you first arrive you pick the causes you care about, and the{" "}
           <Link
-            href="/journal"
+            href="/"
             className="font-semibold text-emerald-700 underline decoration-emerald-300 underline-offset-2 hover:text-emerald-900"
           >
-            journal
-          </Link>
-          : a private log of where you&apos;ve volunteered and for how long, which also
-          powers the &quot;what next?&quot; suggestions. On purpose, this site has:
+            home page
+          </Link>{" "}
+          lines up matches from those picks. On purpose, this site has:
         </p>
         <ul className="mt-3 list-disc space-y-1.5 pl-5 text-slate-700 marker:text-emerald-600">
           <li>
-            <strong>A journal that never leaves your device</strong> — entries and
-            hours are saved in this browser only, and suggestions are computed right
-            here too. Nothing is uploaded, and you can delete it all in one tap.
+            <strong>Causes that never leave your device</strong> — your picks are
+            saved in this browser only, and the matches are computed right here too.
+            Nothing is uploaded, and you can change or clear the picks any time from
+            the home page.
           </li>
           <li>
             <strong>No accounts or sign-ups</strong> — nothing here to register for,
-            ever. Your journal is <em>not</em> the official record either: your
-            school&apos;s signed form (or counselor&apos;s system) still rules.
+            ever. Your hours live on your school&apos;s signed form (or your
+            counselor&apos;s system): that&apos;s the official record.
           </li>
           <li>
             <strong>No in-app applications or messaging</strong> — we don&apos;t sit
@@ -97,7 +97,7 @@ export default function AboutPage() {
             },
             {
               title: "Confirm the hours process before you show up",
-              body: "Ask directly: “Will you sign my school's service-hour form?” Bring the form to every shift — then log the date and hours in your journal here so your own tally stays current.",
+              body: "Ask directly: “Will you sign my school's service-hour form?” Bring the form to every shift — it's the official record of your hours.",
             },
           ].map(({ title, body }, index) => (
             <li key={title} className="flex gap-3">
@@ -185,11 +185,11 @@ export default function AboutPage() {
           No accounts, no cookies for tracking, no analytics that identify you. If you
           enter a ZIP or share your device location, it&apos;s used{" "}
           <strong>only inside your browser</strong> to compute distances and is gone
-          when you close the tab. Saved hearts last for your current visit only. Your
-          journal is different on purpose: it&apos;s kept in this browser&apos;s
-          storage so it survives reloads — but it still{" "}
-          <strong>never leaves your device</strong>, and the journal page has a
-          delete-everything button whenever you want it gone.
+          when you close the tab. Saved hearts last for your current visit only. The
+          causes you pick are different on purpose: they&apos;re kept in this
+          browser&apos;s storage so they survive reloads — but they still{" "}
+          <strong>never leave your device</strong>, and you can change or clear them
+          any time from the home page.
         </p>
       </section>
 
@@ -208,7 +208,7 @@ export default function AboutPage() {
         <p className="mt-2 leading-relaxed text-slate-700">
           We verify listings periodically (each shows a &quot;last verified&quot;
           date), but schedules, age rules, contact people, and hour-verification
-          policies can change at any time. Pitch In can&apos;t guarantee any
+          policies can change at any time. Servd can&apos;t guarantee any
           listing&apos;s accuracy or availability —{" "}
           <strong>
             confirm the details, especially hour sign-off, directly with the
